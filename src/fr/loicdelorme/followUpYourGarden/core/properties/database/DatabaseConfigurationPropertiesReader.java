@@ -82,24 +82,36 @@ public class DatabaseConfigurationPropertiesReader implements IDatabaseConfigura
 		this.password = this.properties.getProperty("password");
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader#getDriver()
+	 */
 	@Override
 	public String getDriver()
 	{
 		return this.driver;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader#getUrl()
+	 */
 	@Override
 	public String getUrl()
 	{
 		return this.url;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader#getUsername()
+	 */
 	@Override
 	public String getUsername()
 	{
 		return this.username;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader#getPassword()
+	 */
 	@Override
 	public String getPassword()
 	{
