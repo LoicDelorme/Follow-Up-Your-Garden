@@ -69,12 +69,18 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator#getGroupsOfPlants(fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public List<GroupOfPlants> getGroupsOfPlants(IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -100,6 +106,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		return groupsOfPlants;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator#getGroupOfPlants(int, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public GroupOfPlants getGroupOfPlants(int groupOfPlantsId, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -117,6 +126,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		return groupOfPlants;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator#addGroupOfPlants(fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator)
+	 */
 	@Override
 	public void addGroupOfPlants(GroupOfPlants groupOfPlants, IPositionManipulator positionManipulator) throws SQLException
 	{
@@ -147,6 +159,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		}
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator#updateGroupOfPlants(fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator)
+	 */
 	@Override
 	public void updateGroupOfPlants(GroupOfPlants groupOfPlants, IPositionManipulator positionManipulator) throws SQLException
 	{
@@ -178,6 +193,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		}
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator#removeGroupOfPlants(fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants)
+	 */
 	@Override
 	public void removeGroupOfPlants(GroupOfPlants groupOfPlants) throws SQLException
 	{
