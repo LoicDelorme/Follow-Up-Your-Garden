@@ -54,12 +54,18 @@ public class TypeOfTasksDatabaseManipulator implements ITypeOfTasksManipulator
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator#getTypesOfTasks()
+	 */
 	@Override
 	public List<TypeOfTasks> getTypesOfTasks() throws SQLException
 	{
@@ -79,6 +85,9 @@ public class TypeOfTasksDatabaseManipulator implements ITypeOfTasksManipulator
 		return typesOfTasks;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator#getTypeOfTasks(int)
+	 */
 	@Override
 	public TypeOfTasks getTypeOfTasks(int typeOfTasksId) throws SQLException
 	{
@@ -93,6 +102,9 @@ public class TypeOfTasksDatabaseManipulator implements ITypeOfTasksManipulator
 		return typeOfTasks;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator#addTypeOfTasks(fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks)
+	 */
 	@Override
 	public void addTypeOfTasks(TypeOfTasks typeOfTasks) throws SQLException
 	{
@@ -103,6 +115,9 @@ public class TypeOfTasksDatabaseManipulator implements ITypeOfTasksManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator#updateTypeOfTasks(fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks)
+	 */
 	@Override
 	public void updateTypeOfTasks(TypeOfTasks typeOfTasks) throws SQLException
 	{
@@ -114,6 +129,9 @@ public class TypeOfTasksDatabaseManipulator implements ITypeOfTasksManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator#removeTypeOfTasks(fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks)
+	 */
 	@Override
 	public void removeTypeOfTasks(TypeOfTasks typeOfTasks) throws SQLException
 	{
