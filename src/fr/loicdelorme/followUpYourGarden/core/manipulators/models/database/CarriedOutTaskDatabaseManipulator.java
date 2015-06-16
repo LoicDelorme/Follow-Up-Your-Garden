@@ -64,12 +64,18 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#getCarriedOutTasks(fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public List<CarriedOutTask> getCarriedOutTasks(IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -92,6 +98,9 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 		return carriedOutTasks;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#getCarriedOutTask(int, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public CarriedOutTask getCarriedOutTask(int carriedOutTaskId, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -109,6 +118,9 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 		return carriedOutTask;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#getCarriedOutTasks(int, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public List<CarriedOutTask> getCarriedOutTasks(int groupOfPlantsId, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -134,6 +146,9 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 		return carriedOutTasks;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#addCarriedOutTask(fr.loicdelorme.followUpYourGarden.core.models.CarriedOutTask)
+	 */
 	@Override
 	public void addCarriedOutTask(CarriedOutTask carriedOutTask) throws SQLException
 	{
@@ -147,6 +162,9 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#removeCarriedOutTask(fr.loicdelorme.followUpYourGarden.core.models.CarriedOutTask)
+	 */
 	@Override
 	public void removeCarriedOutTask(CarriedOutTask carriedOutTask) throws SQLException
 	{
@@ -156,6 +174,9 @@ public class CarriedOutTaskDatabaseManipulator implements ICarriedOutTaskManipul
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator#removeCarriedOutTasks(int)
+	 */
 	@Override
 	public void removeCarriedOutTasks(int groupOfPlantsId) throws SQLException
 	{
