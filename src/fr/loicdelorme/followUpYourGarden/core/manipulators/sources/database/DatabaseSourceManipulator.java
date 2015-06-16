@@ -64,6 +64,9 @@ public class DatabaseSourceManipulator implements ISourceManipulator
 		this.isConnected = false;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator#openConnection()
+	 */
 	@Override
 	public void openConnection() throws SQLException
 	{
@@ -74,18 +77,27 @@ public class DatabaseSourceManipulator implements ISourceManipulator
 		}
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator#isConnected()
+	 */
 	@Override
 	public boolean isConnected()
 	{
 		return this.isConnected;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator#getConnection()
+	 */
 	@Override
 	public Connection getConnection()
 	{
 		return this.connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator#closeConnection()
+	 */
 	@Override
 	public void closeConnection() throws SQLException
 	{
