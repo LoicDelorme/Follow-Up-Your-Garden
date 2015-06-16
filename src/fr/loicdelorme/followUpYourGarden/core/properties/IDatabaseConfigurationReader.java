@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.core.properties.database;
+package fr.loicdelorme.followUpYourGarden.core.properties;
 
 /**
  * This interface allow you to read database configuration data.

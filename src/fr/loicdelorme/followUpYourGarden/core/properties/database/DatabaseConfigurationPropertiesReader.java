@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader;
 import fr.loicdelorme.followUpYourGarden.core.properties.PropertiesConstants;
 
 /**

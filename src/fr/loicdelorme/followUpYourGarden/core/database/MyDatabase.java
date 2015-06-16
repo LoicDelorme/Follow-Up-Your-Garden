@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.sources.database.DatabaseSourceManipulator;
+import fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader;
 import fr.loicdelorme.followUpYourGarden.core.properties.database.DatabaseConfigurationPropertiesReader;
-import fr.loicdelorme.followUpYourGarden.core.properties.database.IDatabaseConfigurationReader;
 
 /**
  * This class allow you to handle your database.
