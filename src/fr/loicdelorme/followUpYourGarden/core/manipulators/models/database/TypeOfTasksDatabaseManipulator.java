@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.core.manipulators.database;
+package fr.loicdelorme.followUpYourGarden.core.manipulators.models.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.loicdelorme.followUpYourGarden.core.manipulators.ITypeOfTasksManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
 
 /**

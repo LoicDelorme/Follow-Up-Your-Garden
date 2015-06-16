@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.core.manipulators;
+package fr.loicdelorme.followUpYourGarden.core.manipulators.models;
 
 import java.sql.SQLException;
 import java.util.List;

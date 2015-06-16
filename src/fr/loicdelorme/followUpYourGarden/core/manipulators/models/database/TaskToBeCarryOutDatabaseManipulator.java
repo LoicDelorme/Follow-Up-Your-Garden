@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.core.manipulators.database;
+package fr.loicdelorme.followUpYourGarden.core.manipulators.models.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.loicdelorme.followUpYourGarden.core.manipulators.IGroupOfPlantsManipulator;
-import fr.loicdelorme.followUpYourGarden.core.manipulators.IPositionManipulator;
-import fr.loicdelorme.followUpYourGarden.core.manipulators.ITaskToBeCarryOutManipulator;
-import fr.loicdelorme.followUpYourGarden.core.manipulators.ITypeOfPlantsManipulator;
-import fr.loicdelorme.followUpYourGarden.core.manipulators.ITypeOfTasksManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator;
 import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.Priority;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
