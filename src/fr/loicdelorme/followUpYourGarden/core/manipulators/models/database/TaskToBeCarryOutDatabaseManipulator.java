@@ -65,12 +65,18 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#getTasksToBeCarryOut(fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public List<TaskToBeCarryOut> getTasksToBeCarryOut(IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -93,6 +99,9 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 		return tasksToBeCarryOut;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#getTaskToBeCarryOut(int, int, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public TaskToBeCarryOut getTaskToBeCarryOut(int groupOfPlantsId, int typeOfTasksId, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -113,6 +122,9 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 		return taskToBeCarryOut;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#getTasksToBeCarryOut(int, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator, fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator)
+	 */
 	@Override
 	public List<TaskToBeCarryOut> getTasksToBeCarryOut(int groupOfPlantsId, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator) throws SQLException
 	{
@@ -138,6 +150,9 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 		return tasksToBeCarryOut;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#addTaskToBeCarryOut(fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut)
+	 */
 	@Override
 	public void addTaskToBeCarryOut(TaskToBeCarryOut taskToBeCarryOut) throws SQLException
 	{
@@ -155,6 +170,9 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#updateTaskToBeCarryOut(fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut)
+	 */
 	@Override
 	public void updateTaskToBeCarryOut(TaskToBeCarryOut taskToBeCarryOut) throws SQLException
 	{
@@ -172,6 +190,9 @@ public class TaskToBeCarryOutDatabaseManipulator implements ITaskToBeCarryOutMan
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator#removeTaskToBeCarryOut(fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut)
+	 */
 	@Override
 	public void removeTaskToBeCarryOut(TaskToBeCarryOut taskToBeCarryOut) throws SQLException
 	{
