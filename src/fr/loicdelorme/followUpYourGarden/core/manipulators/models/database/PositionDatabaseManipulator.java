@@ -59,12 +59,18 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#getPositions()
+	 */
 	@Override
 	public List<Position> getPositions() throws SQLException
 	{
@@ -84,6 +90,9 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 		return positions;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#getPosition(int, int)
+	 */
 	@Override
 	public Position getPosition(int x, int y) throws SQLException
 	{
@@ -99,6 +108,9 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 		return position;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#getPositions(int)
+	 */
 	@Override
 	public List<Position> getPositions(int groupOfPlantsId) throws SQLException
 	{
@@ -119,6 +131,9 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 		return positions;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#addPosition(fr.loicdelorme.followUpYourGarden.core.models.Position)
+	 */
 	@Override
 	public void addPosition(Position position) throws SQLException
 	{
@@ -130,6 +145,9 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#removePosition(fr.loicdelorme.followUpYourGarden.core.models.Position)
+	 */
 	@Override
 	public void removePosition(Position position) throws SQLException
 	{
@@ -140,6 +158,9 @@ public class PositionDatabaseManipulator implements IPositionManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator#removePositions(int)
+	 */
 	@Override
 	public void removePositions(int groupOfPlantsId) throws SQLException
 	{
