@@ -6,7 +6,7 @@ package fr.loicdelorme.followUpYourGarden.core.properties.database;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public interface DatabaseConfigurationReader
+public interface IDatabaseConfigurationReader
 {
 	/**
 	 * Get the driver.

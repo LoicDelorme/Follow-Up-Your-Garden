@@ -13,7 +13,7 @@ import fr.loicdelorme.followUpYourGarden.core.properties.PropertiesConstants;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class DatabaseConfigurationPropertiesReader implements DatabaseConfigurationReader
+public class DatabaseConfigurationPropertiesReader implements IDatabaseConfigurationReader
 {
 	/**
 	 * The properties linked to the file.
