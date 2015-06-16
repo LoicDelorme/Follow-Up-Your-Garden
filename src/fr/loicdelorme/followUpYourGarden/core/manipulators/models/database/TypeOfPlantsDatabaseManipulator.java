@@ -59,12 +59,18 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 	 */
 	private Connection connection;
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.IManipulator#setConnection(java.sql.Connection)
+	 */
 	@Override
 	public void setConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#getTypesOfPlants()
+	 */
 	@Override
 	public List<TypeOfPlants> getTypesOfPlants() throws SQLException
 	{
@@ -84,6 +90,9 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 		return typesOfPlants;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#getTypeOfPlants(int)
+	 */
 	@Override
 	public TypeOfPlants getTypeOfPlants(int typeOfPlantsId) throws SQLException
 	{
@@ -98,6 +107,9 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 		return typeOfPlants;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#getTypesOfPlants(int)
+	 */
 	@Override
 	public List<TypeOfPlants> getTypesOfPlants(int groupOfPlantsId) throws SQLException
 	{
@@ -118,6 +130,9 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 		return typesOfPlants;
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#addTypeOfPlants(fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants)
+	 */
 	@Override
 	public void addTypeOfPlants(TypeOfPlants typeOfPlants) throws SQLException
 	{
@@ -127,6 +142,9 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#updateTypeOfPlants(fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants)
+	 */
 	@Override
 	public void updateTypeOfPlants(TypeOfPlants typeOfPlants) throws SQLException
 	{
@@ -137,6 +155,9 @@ public class TypeOfPlantsDatabaseManipulator implements ITypeOfPlantsManipulator
 		statement.executeUpdate();
 	}
 
+	/**
+	 * @see fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator#removeTypeOfPlants(fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants)
+	 */
 	@Override
 	public void removeTypeOfPlants(TypeOfPlants typeOfPlants) throws SQLException
 	{
