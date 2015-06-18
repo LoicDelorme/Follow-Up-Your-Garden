@@ -6,7 +6,7 @@ package fr.loicdelorme.followUpYourGarden.core.properties;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public interface PropertiesConstants
+public interface IPropertiesConstants
 {
 	/**
 	 * The database configuration file.
