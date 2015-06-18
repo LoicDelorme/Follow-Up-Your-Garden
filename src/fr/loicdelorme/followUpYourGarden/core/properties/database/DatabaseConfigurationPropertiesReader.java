@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import fr.loicdelorme.followUpYourGarden.core.properties.IDatabaseConfigurationReader;
-import fr.loicdelorme.followUpYourGarden.core.properties.PropertiesConstants;
+import fr.loicdelorme.followUpYourGarden.core.properties.IPropertiesConstants;
 
 /**
  * This class allow you to read database configuration data into a properties file.
@@ -52,7 +52,7 @@ public class DatabaseConfigurationPropertiesReader implements IDatabaseConfigura
 	public DatabaseConfigurationPropertiesReader() throws FileNotFoundException, IOException
 	{
 		this.properties = new Properties();
-		openPropertiesFile(PropertiesConstants.DATABASE_CONFIGURATION_FILE);
+		openPropertiesFile(IPropertiesConstants.DATABASE_CONFIGURATION_FILE);
 	}
 
 	/**
