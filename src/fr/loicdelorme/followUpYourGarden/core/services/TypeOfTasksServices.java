@@ -1,8 +1,13 @@
 package fr.loicdelorme.followUpYourGarden.core.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
+import fr.loicdelorme.followUpYourGarden.core.database.MyDatabase;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidTypeOfTasksDescriptionException;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidTypeOfTasksIdException;
@@ -41,6 +46,32 @@ public class TypeOfTasksServices
 	}
 
 	/**
+	 * Get all types of tasks.
+	 * 
+	 * @return A list of types of tasks.
+	 * @throws SQLException
+	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 */
+	public List<TypeOfTasks> getTypesOfTasks() throws SQLException, ClassNotFoundException, FileNotFoundException, IOException
+	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.typeOfTasksManipulator.setConnection(sourceManipulator.getConnection());
+		List<TypeOfTasks> typesOfTasks = this.typeOfTasksManipulator.getTypesOfTasks();
+
+		sourceManipulator.closeConnection();
+
+		return typesOfTasks;
+	}
+
+	/**
 	 * Add a type of tasks.
 	 * 
 	 * @param wording
@@ -61,11 +92,24 @@ public class TypeOfTasksServices
 	 *             The description is empty.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void addTypeOfPlants(String wording, String description) throws MissingTypeOfTasksIdException, MissingTypeOfTasksWordingException, MissingTypeOfTasksDescriptionException, InvalidTypeOfTasksIdException, InvalidTypeOfTasksWordingException, InvalidTypeOfTasksDescriptionException, SQLException
+	public void addTypeOfTasks(String wording, String description) throws MissingTypeOfTasksIdException, MissingTypeOfTasksWordingException, MissingTypeOfTasksDescriptionException, InvalidTypeOfTasksIdException, InvalidTypeOfTasksWordingException, InvalidTypeOfTasksDescriptionException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkTypeOfTasksParameters(TypeOfTasks.UNKNOWN_TYPE_OF_TASKS_ID, wording, description);
+
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.typeOfTasksManipulator.setConnection(sourceManipulator.getConnection());
 		this.typeOfTasksManipulator.addTypeOfTasks(new TypeOfTasks(TypeOfTasks.UNKNOWN_TYPE_OF_TASKS_ID, wording, description));
+
+		sourceManipulator.closeConnection();
 	}
 
 	/**
@@ -91,8 +135,14 @@ public class TypeOfTasksServices
 	 *             The description is empty.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void updateTypeOfPlants(String wording, String description, TypeOfTasks oldTypeOfTasks) throws MissingTypeOfTasksIdException, MissingTypeOfTasksWordingException, MissingTypeOfTasksDescriptionException, InvalidTypeOfTasksIdException, InvalidTypeOfTasksWordingException, InvalidTypeOfTasksDescriptionException, SQLException
+	public void updateTypeOfTasks(String wording, String description, TypeOfTasks oldTypeOfTasks) throws MissingTypeOfTasksIdException, MissingTypeOfTasksWordingException, MissingTypeOfTasksDescriptionException, InvalidTypeOfTasksIdException, InvalidTypeOfTasksWordingException, InvalidTypeOfTasksDescriptionException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkTypeOfTasksParameters(oldTypeOfTasks.getId(), wording, description);
 
@@ -100,7 +150,13 @@ public class TypeOfTasksServices
 
 		if (!oldTypeOfTasks.equals(newTypeOfTasks))
 		{
+			ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+			sourceManipulator.openConnection();
+
+			this.typeOfTasksManipulator.setConnection(sourceManipulator.getConnection());
 			this.typeOfTasksManipulator.addTypeOfTasks(newTypeOfTasks);
+
+			sourceManipulator.closeConnection();
 		}
 	}
 
@@ -111,10 +167,22 @@ public class TypeOfTasksServices
 	 *            The type of tasks to remove.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void removeTypeOfPlants(TypeOfTasks typeOfTasksToRemove) throws SQLException
+	public void removeTypeOfTasks(TypeOfTasks typeOfTasksToRemove) throws SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.typeOfTasksManipulator.setConnection(sourceManipulator.getConnection());
 		this.typeOfTasksManipulator.removeTypeOfTasks(typeOfTasksToRemove);
+
+		sourceManipulator.closeConnection();
 	}
 
 	/**
