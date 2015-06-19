@@ -1,12 +1,17 @@
 package fr.loicdelorme.followUpYourGarden.core.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
 import javafx.scene.paint.Color;
+import fr.loicdelorme.followUpYourGarden.core.database.MyDatabase;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator;
 import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.Position;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
@@ -60,17 +65,51 @@ public class GroupOfPlantsServices
 	private IPositionManipulator positionManipulator;
 
 	/**
+	 * A type of plants manipulator.
+	 */
+	private ITypeOfPlantsManipulator typeOfPlantsManipulator;
+
+	/**
 	 * Create a group of plants services.
 	 * 
 	 * @param groupOfPlantsManipulator
 	 *            A group of plants manipulator.
 	 * @param positionManipulator
 	 *            A position manipulator.
+	 * @param typeOfPlantsManipulator
+	 *            A type of plants manipulator.
 	 */
-	public GroupOfPlantsServices(IGroupOfPlantsManipulator groupOfPlantsManipulator, IPositionManipulator positionManipulator)
+	public GroupOfPlantsServices(IGroupOfPlantsManipulator groupOfPlantsManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator)
 	{
 		this.groupOfPlantsManipulator = groupOfPlantsManipulator;
 		this.positionManipulator = positionManipulator;
+		this.typeOfPlantsManipulator = typeOfPlantsManipulator;
+	}
+
+	/**
+	 * Get all groups of plants.
+	 * 
+	 * @return A list of groups of plants.
+	 * @throws SQLException
+	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 */
+	public List<GroupOfPlants> getGroupsOfPlants() throws ClassNotFoundException, FileNotFoundException, IOException, SQLException
+	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
+		List<GroupOfPlants> groupsOfPlants = this.groupOfPlantsManipulator.getGroupsOfPlants(this.positionManipulator, this.typeOfPlantsManipulator);
+
+		sourceManipulator.closeConnection();
+
+		return groupsOfPlants;
 	}
 
 	/**
@@ -120,11 +159,24 @@ public class GroupOfPlantsServices
 	 *             The list of positions is empty.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException
+	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, path, iconColor, typesOfPlants, positions);
+
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
 		this.groupOfPlantsManipulator.addGroupOfPlants(new GroupOfPlants(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, path, iconColor, typesOfPlants, positions), this.positionManipulator);
+
+		sourceManipulator.closeConnection();
 	}
 
 	/**
@@ -176,8 +228,14 @@ public class GroupOfPlantsServices
 	 *             The list of positions is empty.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException
+	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(oldGroupOfPlants.getId(), wording, plantingDate, path, iconColor, typesOfPlants, positions);
 
@@ -185,7 +243,13 @@ public class GroupOfPlantsServices
 
 		if (!oldGroupOfPlants.equals(newGroupOfPlants))
 		{
+			ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+			sourceManipulator.openConnection();
+
+			this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
 			this.groupOfPlantsManipulator.updateGroupOfPlants(newGroupOfPlants, this.positionManipulator);
+
+			sourceManipulator.closeConnection();
 		}
 	}
 
@@ -196,10 +260,22 @@ public class GroupOfPlantsServices
 	 *            The group of plants to remove.
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
 	 */
-	public void removeGroupOfPlants(GroupOfPlants groupOfPlantsToRemove) throws SQLException
+	public void removeGroupOfPlants(GroupOfPlants groupOfPlantsToRemove) throws SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
 		this.groupOfPlantsManipulator.removeGroupOfPlants(groupOfPlantsToRemove);
+
+		sourceManipulator.closeConnection();
 	}
 
 	/**
