@@ -18,7 +18,7 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	@Override
 	public int compare(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
-		return compareTaskToBeCarryOutOnPriorityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+		return compareOnPriorityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
 	}
 
 	/**
@@ -30,11 +30,11 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	 *            A task to be carry out.
 	 * @return The result of comparison.
 	 */
-	private int compareTaskToBeCarryOutOnPriorityAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
+	private int compareOnPriorityAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
 		if (firstTaskToBeCarryOut.getPriority().getId() == secondTaskToBeCarryOut.getPriority().getId())
 		{
-			return compareTaskToBeCarryOutOnCurrentProgressionAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+			return compareOnCurrentProgressionAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
 		}
 
 		if (firstTaskToBeCarryOut.getPriority().getId() > secondTaskToBeCarryOut.getPriority().getId())
@@ -54,11 +54,11 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	 *            A task to be carry out.
 	 * @return The result of comparison.
 	 */
-	private int compareTaskToBeCarryOutOnCurrentProgressionAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
+	private int compareOnCurrentProgressionAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
 		if (firstTaskToBeCarryOut.getCurrentProgression() == secondTaskToBeCarryOut.getCurrentProgression())
 		{
-			return compareTaskToBeCarryOutOnAnticipatedDurationAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+			return compareOnAnticipatedDurationAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
 		}
 
 		if (firstTaskToBeCarryOut.getCurrentProgression() > secondTaskToBeCarryOut.getCurrentProgression())
@@ -78,11 +78,11 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	 *            A task to be carry out.
 	 * @return The result of comparison.
 	 */
-	private int compareTaskToBeCarryOutOnAnticipatedDurationAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
+	private int compareOnAnticipatedDurationAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
 		if (firstTaskToBeCarryOut.getAnticipatedDuration() == secondTaskToBeCarryOut.getAnticipatedDuration())
 		{
-			return compareTaskToBeCarryOutOnPeriodicityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+			return compareOnPeriodicityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
 		}
 
 		if (firstTaskToBeCarryOut.getAnticipatedDuration() > secondTaskToBeCarryOut.getAnticipatedDuration())
@@ -102,7 +102,7 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	 *            A task to be carry out.
 	 * @return The result of comparison.
 	 */
-	private int compareTaskToBeCarryOutOnPeriodicityAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
+	private int compareOnPeriodicityAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
 		if (firstTaskToBeCarryOut.getPeriodicity() == secondTaskToBeCarryOut.getPeriodicity())
 		{
