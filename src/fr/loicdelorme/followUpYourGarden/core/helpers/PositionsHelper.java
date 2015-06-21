@@ -24,7 +24,7 @@ public class PositionsHelper
 	 * 
 	 * @return A list of positions.
 	 */
-	public static List<Position> generateAllPossiblePositions(int width, int height)
+	public static List<Position> generatePossiblePositions(int width, int height)
 	{
 		List<Position> positions = new ArrayList<Position>();
 
@@ -37,5 +37,28 @@ public class PositionsHelper
 		}
 
 		return positions;
+	}
+
+	/**
+	 * Get all available positions.
+	 * 
+	 * @param width
+	 *            The width.
+	 * @param height
+	 *            The height.
+	 * @param occupiedPositions
+	 *            The list of occupied positions.
+	 * @return A list of available positions.
+	 */
+	public static List<Position> getAvailablePositions(int width, int height, List<Position> occupiedPositions)
+	{
+		List<Position> availablePositions = generatePossiblePositions(width, height);
+
+		for (Position currentOccupiedPosition : occupiedPositions)
+		{
+			availablePositions.remove(new Position(currentOccupiedPosition.getX(), currentOccupiedPosition.getY(), GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID));
+		}
+
+		return availablePositions;
 	}
 }
