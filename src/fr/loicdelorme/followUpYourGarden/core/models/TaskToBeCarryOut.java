@@ -194,42 +194,66 @@ public class TaskToBeCarryOut implements Comparable<TaskToBeCarryOut>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof TaskToBeCarryOut))
+		{
 			return false;
+		}
 
 		TaskToBeCarryOut taskToBeCarryOut = (TaskToBeCarryOut) object;
 
 		if (!this.groupOfPlants.equals(taskToBeCarryOut.groupOfPlants))
+		{
 			return false;
+		}
 
 		if (!this.typeOfTasks.equals(taskToBeCarryOut.typeOfTasks))
+		{
 			return false;
+		}
 
 		if (!this.deadlineDate.equals(taskToBeCarryOut.deadlineDate))
+		{
 			return false;
+		}
 
 		if (this.priority != taskToBeCarryOut.priority)
+		{
 			return false;
+		}
 
 		if (!this.description.equals(taskToBeCarryOut.description))
+		{
 			return false;
+		}
 
 		if (this.currentProgression != taskToBeCarryOut.currentProgression)
+		{
 			return false;
+		}
 
 		if (this.anticipatedDuration != taskToBeCarryOut.anticipatedDuration)
+		{
 			return false;
+		}
 
 		if (this.isRecurrent != taskToBeCarryOut.isRecurrent)
+		{
 			return false;
+		}
 
 		if (this.periodicity != taskToBeCarryOut.periodicity)
+		{
 			return false;
+		}
 
 		return true;
 	}
