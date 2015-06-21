@@ -32,7 +32,7 @@ public class CasesHelper
 	 *            The list of occupied positions.
 	 * @return A list of cases.
 	 */
-	public List<Case> generateGlobalRepresentationCases(int width, int height, List<GroupOfPlants> groupsOfPlants, List<Position> occupiedPositions)
+	public static List<Case> generateGlobalRepresentationCases(int width, int height, List<GroupOfPlants> groupsOfPlants, List<Position> occupiedPositions)
 	{
 		Map<Integer, GroupOfPlants> groupsOfPlantsMap = new HashMap<Integer, GroupOfPlants>();
 		for (GroupOfPlants currentGroupOfPlants : groupsOfPlants)
