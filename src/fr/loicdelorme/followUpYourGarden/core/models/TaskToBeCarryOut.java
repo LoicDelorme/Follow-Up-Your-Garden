@@ -180,6 +180,9 @@ public class TaskToBeCarryOut implements Comparable<TaskToBeCarryOut>
 		return this.periodicity;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -190,6 +193,9 @@ public class TaskToBeCarryOut implements Comparable<TaskToBeCarryOut>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -258,6 +264,9 @@ public class TaskToBeCarryOut implements Comparable<TaskToBeCarryOut>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -276,6 +285,9 @@ public class TaskToBeCarryOut implements Comparable<TaskToBeCarryOut>
 		return resultat;
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(TaskToBeCarryOut taskToBeCarryOut)
 	{
