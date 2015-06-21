@@ -67,5 +67,4 @@ public interface IContentController
 	 * The error file extension.
 	 */
 	public static final String ERROR_FILE_EXTENSION = ".txt";
-
 }
