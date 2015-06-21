@@ -85,6 +85,9 @@ public enum Priority
 		return this.path;
 	}
 
+	/**
+	 * @see java.lang.Enum#toString()
+	 */
 	@Override
 	public String toString()
 	{
