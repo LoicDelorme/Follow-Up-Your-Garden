@@ -89,24 +89,36 @@ public class TypeOfTasks implements Comparable<TypeOfTasks>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof TypeOfTasks))
+		{
 			return false;
+		}
 
 		TypeOfTasks typeOfTasks = (TypeOfTasks) object;
 
 		if (this.id != typeOfTasks.id)
+		{
 			return false;
+		}
 
 		if (!this.wording.equals(typeOfTasks.wording))
+		{
 			return false;
+		}
 
 		if (!this.description.equals(typeOfTasks.description))
+		{
 			return false;
+		}
 
 		return true;
 	}
