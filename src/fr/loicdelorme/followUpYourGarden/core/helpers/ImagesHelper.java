@@ -10,7 +10,7 @@ import java.nio.file.Files;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class ImageHelper
+public class ImagesHelper
 {
 	/**
 	 * Copy the file to a new destination.
