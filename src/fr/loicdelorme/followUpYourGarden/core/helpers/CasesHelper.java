@@ -40,36 +40,19 @@ public class CasesHelper
 			groupsOfPlantsMap.put(currentGroupOfPlants.getId(), currentGroupOfPlants);
 		}
 
-		List<Case> tempCases = new ArrayList<Case>();
+		List<Case> cases = new ArrayList<Case>();
+
 		GroupOfPlants groupOfPlants;
 		for (Position currentOccupiedPosition : occupiedPositions)
 		{
 			groupOfPlants = groupsOfPlantsMap.get(currentOccupiedPosition.getGroupOfPlantsId());
-			tempCases.add(new CaseWithGroupOfPlants(currentOccupiedPosition, groupOfPlants.getIconColor(), groupOfPlants));
+			cases.add(new CaseWithGroupOfPlants(currentOccupiedPosition, groupOfPlants.getIconColor(), groupOfPlants));
 		}
 
-		tempCases.sort(null);
-
-		List<Case> cases = new ArrayList<Case>();
-		cases.addAll(tempCases);
-
-		int index = 0;
-		Case currentCase = cases.get(index);
-
-		for (int x = 1; x <= width; x++)
+		List<Position> availablePositions = PositionsHelper.getAvailablePositions(width, height, occupiedPositions);
+		for (Position currentAvailablePosition : availablePositions)
 		{
-			for (int y = 1; y <= height; y++)
-			{
-				if (!currentCase.getPosition().areCoordinatesEquals(x, y))
-				{
-					cases.add(new Case(new Position(x, y, GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID), Color.WHITE));
-				}
-				else
-				{
-					index++;
-					currentCase = cases.get(index);
-				}
-			}
+			cases.add(new Case(currentAvailablePosition, Color.WHITE));
 		}
 
 		cases.sort(null);
