@@ -75,6 +75,9 @@ public class TypeOfTasks implements Comparable<TypeOfTasks>
 		return this.description;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -85,6 +88,9 @@ public class TypeOfTasks implements Comparable<TypeOfTasks>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -123,12 +129,18 @@ public class TypeOfTasks implements Comparable<TypeOfTasks>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		return (this.id + this.wording.hashCode() + this.description.hashCode());
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(TypeOfTasks typeOfTasks)
 	{
