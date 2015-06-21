@@ -18,7 +18,31 @@ public class TaskToBeCarryOutComparator implements Comparator<TaskToBeCarryOut>
 	@Override
 	public int compare(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
 	{
-		return compareOnPriorityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+		return compareOnDeadlineDateAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+	}
+	
+	/**
+	 * Compare task to be carry out on deadline date attribute.
+	 * 
+	 * @param firstTaskToBeCarryOut
+	 *            A task to be carry out.
+	 * @param secondTaskToBeCarryOut
+	 *            A task to be carry out.
+	 * @return The result of comparison.
+	 */
+	private int compareOnDeadlineDateAttribute(TaskToBeCarryOut firstTaskToBeCarryOut, TaskToBeCarryOut secondTaskToBeCarryOut)
+	{
+		if (firstTaskToBeCarryOut.getDeadlineDate().equals(secondTaskToBeCarryOut.getDeadlineDate()))
+		{
+			return compareOnPriorityAttribute(firstTaskToBeCarryOut, secondTaskToBeCarryOut);
+		}
+
+		if (firstTaskToBeCarryOut.getDeadlineDate().isAfter(secondTaskToBeCarryOut.getDeadlineDate()))
+		{
+			return 1;
+		}
+
+		return -1;
 	}
 
 	/**
