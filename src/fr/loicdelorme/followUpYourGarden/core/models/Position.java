@@ -43,13 +43,16 @@ public class Position implements Comparable<Position>
 	/**
 	 * Test if two positions have same coordinates.
 	 * 
-	 * @param position
-	 *            A position.
+	 * @param x
+	 *            The X coordinate.
+	 * @param y
+	 *            The Y coordinate.
+	 * 
 	 * @return True if they have the same coordinates, else False.
 	 */
-	public boolean areCoordinatesEquals(Position position)
+	public boolean areCoordinatesEquals(int x, int y)
 	{
-		return ((this.x == position.x) && (this.y == position.y));
+		return ((this.x == x) && (this.y == y));
 	}
 
 	/**
