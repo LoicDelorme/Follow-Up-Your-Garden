@@ -71,21 +71,31 @@ public class TypeOfPlants implements Comparable<TypeOfPlants>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof TypeOfPlants))
+		{
 			return false;
+		}
 
 		TypeOfPlants typeOfPlants = (TypeOfPlants) object;
 
 		if (this.id != typeOfPlants.id)
+		{
 			return false;
+		}
 
 		if (!this.wording.equals(typeOfPlants.wording))
+		{
 			return false;
+		}
 
 		return true;
 	}
