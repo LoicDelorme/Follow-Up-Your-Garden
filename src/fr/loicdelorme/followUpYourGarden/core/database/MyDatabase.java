@@ -40,11 +40,15 @@ public class MyDatabase
 	public static ISourceManipulator getInstance() throws ClassNotFoundException, FileNotFoundException, IOException
 	{
 		if (databaseConfigurationReader == null)
+		{
 			databaseConfigurationReader = new DatabaseConfigurationPropertiesReader();
+		}
 
 		if (sourceManipulator == null)
+		{
 			sourceManipulator = new DatabaseSourceManipulator(databaseConfigurationReader.getDriver(), databaseConfigurationReader.getUrl(), databaseConfigurationReader.getUsername(), databaseConfigurationReader.getPassword());
-
+		}
+		
 		return sourceManipulator;
 	}
 }
