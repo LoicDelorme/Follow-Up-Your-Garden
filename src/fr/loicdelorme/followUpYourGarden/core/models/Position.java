@@ -96,24 +96,36 @@ public class Position implements Comparable<Position>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof Position))
+		{
 			return false;
+		}
 
 		Position position = (Position) object;
 
 		if (this.x != position.x)
+		{
 			return false;
+		}
 
 		if (this.y != position.y)
+		{
 			return false;
+		}
 
 		if (this.groupOfPlantsId != position.groupOfPlantsId)
+		{
 			return false;
+		}
 
 		return true;
 	}
@@ -130,7 +142,9 @@ public class Position implements Comparable<Position>
 		int result = this.x - position.x;
 
 		if (result != 0)
+		{
 			return result;
+		}
 
 		result = this.y - position.y;
 
