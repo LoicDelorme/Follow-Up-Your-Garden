@@ -57,6 +57,9 @@ public class TypeOfPlants implements Comparable<TypeOfPlants>
 		return this.wording;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -67,6 +70,9 @@ public class TypeOfPlants implements Comparable<TypeOfPlants>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -100,12 +106,18 @@ public class TypeOfPlants implements Comparable<TypeOfPlants>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		return (this.id + this.wording.hashCode());
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(TypeOfPlants typeOfPlants)
 	{
