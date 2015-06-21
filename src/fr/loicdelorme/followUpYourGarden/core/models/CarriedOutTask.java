@@ -145,33 +145,51 @@ public class CarriedOutTask implements Comparable<CarriedOutTask>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof CarriedOutTask))
+		{
 			return false;
+		}
 
 		CarriedOutTask carriedOutTask = (CarriedOutTask) object;
 
 		if (this.id != carriedOutTask.id)
+		{
 			return false;
+		}
 
 		if (!this.groupOfPlants.equals(carriedOutTask.groupOfPlants))
+		{
 			return false;
+		}
 
 		if (!this.typeOfTasks.equals(carriedOutTask.typeOfTasks))
+		{
 			return false;
+		}
 
 		if (!this.carriedOutDate.equals(carriedOutTask.carriedOutDate))
+		{
 			return false;
+		}
 
 		if (!this.deadlineDate.equals(carriedOutTask.deadlineDate))
+		{
 			return false;
+		}
 
 		if (!this.description.equals(carriedOutTask.description))
+		{
 			return false;
+		}
 
 		return true;
 	}
