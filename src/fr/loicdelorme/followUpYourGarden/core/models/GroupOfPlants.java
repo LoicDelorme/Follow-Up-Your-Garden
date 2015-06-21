@@ -169,42 +169,66 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 	public boolean equals(Object object)
 	{
 		if (this == object)
+		{
 			return true;
+		}
 
 		if (object == null)
+		{
 			return false;
+		}
 
 		if (!(object instanceof GroupOfPlants))
+		{
 			return false;
+		}
 
 		GroupOfPlants groupOfPlants = (GroupOfPlants) object;
 
 		if (this.id != groupOfPlants.id)
+		{
 			return false;
+		}
 
 		if (!this.wording.equals(groupOfPlants.wording))
+		{
 			return false;
+		}
 
 		if (!this.plantingDate.equals(groupOfPlants.plantingDate))
+		{
 			return false;
+		}
 
 		if (!this.path.equals(groupOfPlants.path))
+		{
 			return false;
+		}
 
 		if (!this.iconColor.equals(groupOfPlants.iconColor))
+		{
 			return false;
+		}
 
 		if (this.typesOfPlants.size() != groupOfPlants.typesOfPlants.size())
+		{
 			return false;
+		}
 
 		if (this.positions.size() != groupOfPlants.positions.size())
+		{
 			return false;
+		}
 
 		if (!this.typesOfPlants.equals(groupOfPlants.typesOfPlants))
+		{
 			return false;
+		}
 
 		if (!this.positions.equals(groupOfPlants.positions))
+		{
 			return false;
+		}
 
 		return true;
 	}
