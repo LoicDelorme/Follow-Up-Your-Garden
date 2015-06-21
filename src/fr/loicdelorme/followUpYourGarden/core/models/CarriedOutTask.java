@@ -131,6 +131,9 @@ public class CarriedOutTask implements Comparable<CarriedOutTask>
 		return this.description;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -141,6 +144,9 @@ public class CarriedOutTask implements Comparable<CarriedOutTask>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -194,6 +200,9 @@ public class CarriedOutTask implements Comparable<CarriedOutTask>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -209,6 +218,9 @@ public class CarriedOutTask implements Comparable<CarriedOutTask>
 		return resultat;
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(CarriedOutTask carriedOutTask)
 	{
