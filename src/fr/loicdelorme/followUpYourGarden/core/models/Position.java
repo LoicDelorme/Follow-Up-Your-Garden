@@ -82,6 +82,9 @@ public class Position implements Comparable<Position>
 		return this.groupOfPlantsId;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -92,6 +95,9 @@ public class Position implements Comparable<Position>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -130,12 +136,18 @@ public class Position implements Comparable<Position>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		return (this.x + this.y + this.groupOfPlantsId);
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(Position position)
 	{
