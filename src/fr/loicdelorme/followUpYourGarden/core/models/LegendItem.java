@@ -3,12 +3,12 @@ package fr.loicdelorme.followUpYourGarden.core.models;
 import javafx.scene.paint.Color;
 
 /**
- * This class allow you to create a legend.
+ * This class allow you to create a legend item.
  * 
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class Legend
+public class LegendItem
 {
 	/**
 	 * The wording.
@@ -21,14 +21,14 @@ public class Legend
 	private final Color iconColor;
 
 	/**
-	 * Create a legend.
+	 * Create a legend item.
 	 * 
 	 * @param wording
 	 *            The wording.
 	 * @param iconColor
 	 *            The icon color.
 	 */
-	public Legend(String wording, Color iconColor)
+	public LegendItem(String wording, Color iconColor)
 	{
 		this.wording = wording;
 		this.iconColor = iconColor;
@@ -83,19 +83,19 @@ public class Legend
 			return false;
 		}
 
-		if (!(object instanceof Legend))
+		if (!(object instanceof LegendItem))
 		{
 			return false;
 		}
 
-		Legend legend = (Legend) object;
+		LegendItem legendItem = (LegendItem) object;
 
-		if (!this.wording.equals(legend.wording))
+		if (!this.wording.equals(legendItem.wording))
 		{
 			return false;
 		}
 
-		if (!this.iconColor.equals(legend.iconColor))
+		if (!this.iconColor.equals(legendItem.iconColor))
 		{
 			return false;
 		}
