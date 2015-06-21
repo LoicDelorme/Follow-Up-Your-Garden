@@ -12,7 +12,7 @@ import fr.loicdelorme.followUpYourGarden.core.models.LegendItem;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class LegendHelper
+public class LegendItemsHelper
 {
 	/**
 	 * Generate the legend.
@@ -22,7 +22,7 @@ public class LegendHelper
 	 * 
 	 * @return A list of legend items.
 	 */
-	public List<LegendItem> generateLegend(List<GroupOfPlants> groupsOfPlants)
+	public static List<LegendItem> generateLegend(List<GroupOfPlants> groupsOfPlants)
 	{
 		List<LegendItem> legendItems = new ArrayList<LegendItem>();
 
