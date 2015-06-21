@@ -155,6 +155,9 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 		return this.positions;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -165,6 +168,9 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 		return representation.toString();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object object)
 	{
@@ -233,6 +239,9 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 		return true;
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -249,6 +258,9 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 		return resultat;
 	}
 
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(GroupOfPlants groupOfPlants)
 	{
