@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.core.generators;
+package fr.loicdelorme.followUpYourGarden.core.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
