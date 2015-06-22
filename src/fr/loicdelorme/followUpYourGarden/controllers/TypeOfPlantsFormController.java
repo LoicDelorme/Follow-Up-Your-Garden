@@ -2,16 +2,13 @@ package fr.loicdelorme.followUpYourGarden.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.UUID;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import fr.loicdelorme.followUpYourGarden.core.helpers.DialogsHelper;
-import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.services.TypeOfPlantsServices;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidTypeOfPlantsIdException;
@@ -25,13 +22,19 @@ import fr.loicdelorme.followUpYourGarden.core.services.exceptions.MissingTypeOfP
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class TypeOfPlantsFormController
+public class TypeOfPlantsFormController extends Controller
 {
 	/**
 	 * The title.
 	 */
 	@FXML
 	private Label title;
+
+	/**
+	 * The wording label.
+	 */
+	@FXML
+	private Label wordingLabel;
 
 	/**
 	 * The wording.
@@ -72,34 +75,47 @@ public class TypeOfPlantsFormController
 	private Stage stage;
 
 	/**
+	 * The bundle.
+	 */
+	private ResourceBundle bundle;
+
+	/**
 	 * Create a type of plants form controller.
 	 * 
-	 * @param title
-	 *            The title.
 	 * @param typeOfPlants
 	 *            The type of plants.
 	 * @param typeOfPlantsServices
 	 *            The type of plants services.
 	 * @param stage
 	 *            The stage.
+	 * @param bundle
+	 *            The bundle.
 	 */
-	public TypeOfPlantsFormController(String title, TypeOfPlants typeOfPlants, TypeOfPlantsServices typeOfPlantsServices, Stage stage)
+	public TypeOfPlantsFormController(TypeOfPlants typeOfPlants, TypeOfPlantsServices typeOfPlantsServices, Stage stage, ResourceBundle bundle)
 	{
-		this.title.setText(title);
-
-		if (typeOfPlants != null)
-		{
-			this.wording.setText(typeOfPlants.getWording());
-			this.isUpdateForm = true;
-		}
-		else
-		{
-			this.isUpdateForm = false;
-		}
-
 		this.typeOfPlants = typeOfPlants;
 		this.typeOfPlantsServices = typeOfPlantsServices;
 		this.stage = stage;
+		this.bundle = bundle;
+
+		if (this.typeOfPlants == null)
+		{
+			this.title.setText(this.bundle.getString("typeOfPlantsAdditionFormTitle"));
+			this.wording.setPromptText(this.bundle.getString("typeOfPlantsWordingPromptText"));
+			this.isUpdateForm = false;
+		}
+		else
+		{
+			this.title.setText(this.bundle.getString("typeOfPlantsModificationFormTitle"));
+			this.wording.setText(this.typeOfPlants.getWording());
+			this.isUpdateForm = true;
+		}
+
+		this.wordingLabel.setText(this.bundle.getString("typeOfPlantsWordingLabel"));
+		this.valid.setText(this.bundle.getString("typeOfPlantsValidButton"));
+		this.cancel.setText(this.bundle.getString("typeOfPlantsCancelButton"));
+
+		this.stage.setResizable(false);
 	}
 
 	/**
@@ -112,47 +128,34 @@ public class TypeOfPlantsFormController
 			if (this.isUpdateForm)
 			{
 				this.typeOfPlantsServices.updateTypeOfPlants(this.wording.getText(), this.typeOfPlants);
-
-				Alert alert = DialogsHelper.generateInformationDialog(IContentController.OPERATION_SUCCESS_TITLE, "The type of plants was updated!");
-				alert.showAndWait();
-
+				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfPlantsModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
 				this.typeOfPlantsServices.addTypeOfPlants(this.wording.getText());
-
-				Alert alert = DialogsHelper.generateInformationDialog(IContentController.OPERATION_SUCCESS_TITLE, "The type of plants was added!");
-				alert.showAndWait();
-
+				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfPlantsAdditionSuccess"));
 				this.stage.close();
 			}
 		}
 		catch (MissingTypeOfPlantsIdException | MissingTypeOfPlantsWordingException | InvalidTypeOfPlantsIdException | InvalidTypeOfPlantsWordingException e)
 		{
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.FORM_DATA_EXCEPTION_TITLE, IContentController.FORM_DATA_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.displayError(this.bundle.getString("invalidFormTitle"), this.bundle.getString("invalidFormHeader"), e.getMessage());
 		}
 		catch (ClassNotFoundException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.CLASS_NOT_FOUND_EXCEPTION_TITLE, IContentController.CLASS_NOT_FOUND_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("driverErrorTitle"), this.bundle.getString("driverErrorHeader"), e.getMessage());
 		}
 		catch (SQLException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.SQL_EXCEPTION_TITLE, IContentController.SQL_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("sqlErrorTitle"), this.bundle.getString("sqlErrorHeader"), e.getMessage());
 		}
 		catch (IOException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.IO_EXCEPTION_TITLE, IContentController.IO_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("ioErrorTitle"), this.bundle.getString("ioErrorHeader"), e.getMessage());
 		}
 	}
 
