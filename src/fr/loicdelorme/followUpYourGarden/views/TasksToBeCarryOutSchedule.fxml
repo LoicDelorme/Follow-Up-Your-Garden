@@ -12,27 +12,27 @@
         <menus>
           <Menu fx:id="actions" mnemonicParsing="false">
             <items>
-              <MenuItem fx:id="quit" mnemonicParsing="false" />
+              <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#onQuitAction" />
             </items>
           </Menu>
           <Menu fx:id="typeOfPlants" mnemonicParsing="false">
             <items>
-              <MenuItem fx:id="addTypeOfPlants" mnemonicParsing="false" />
-                  <MenuItem fx:id="updateTypeOfPlants" mnemonicParsing="false" />
-                  <MenuItem fx:id="removeTypeOfPlants" mnemonicParsing="false" />
+              <MenuItem fx:id="addTypeOfPlants" mnemonicParsing="false" onAction="#onAddTypeOfPlantsAction" />
+                  <MenuItem fx:id="updateTypeOfPlants" mnemonicParsing="false" onAction="#onUpdateTypeOfPlantsAction" />
+                  <MenuItem fx:id="removeTypeOfPlants" mnemonicParsing="false" onAction="#onRemoveTypeOfPlantsAction" />
             </items>
           </Menu>
           <Menu fx:id="typeOfTasks" mnemonicParsing="false">
             <items>
-              <MenuItem fx:id="addTypeOfTasks" mnemonicParsing="false" />
-                  <MenuItem fx:id="updateTypeOfTasks" mnemonicParsing="false" />
-                  <MenuItem fx:id="removeTypeOfTasks" mnemonicParsing="false" />
+              <MenuItem fx:id="addTypeOfTasks" mnemonicParsing="false" onAction="#onAddTypeOfTasksAction" />
+                  <MenuItem fx:id="updateTypeOfTasks" mnemonicParsing="false" onAction="#onUpdateTypeOfTasksAction" />
+                  <MenuItem fx:id="removeTypeOfTasks" mnemonicParsing="false" onAction="#onRemoveTypeOfTasksAction" />
             </items>
           </Menu>
             <Menu fx:id="help" mnemonicParsing="false">
                <items>
-                  <MenuItem fx:id="documentation" mnemonicParsing="false" />
-                  <MenuItem fx:id="about" mnemonicParsing="false" />
+                  <MenuItem fx:id="documentation" mnemonicParsing="false" onAction="#onDocumentationAction" />
+                  <MenuItem fx:id="about" mnemonicParsing="false" onAction="#onAboutAction" />
                </items>
             </Menu>
         </menus>
@@ -45,9 +45,9 @@
       </MenuBar>
       <HBox spacing="15.0">
          <children>
-            <Button fx:id="validateTaskToBeCarryOut" mnemonicParsing="false" />
-            <Button fx:id="updateTaskToBeCarryOut" mnemonicParsing="false" />
-            <Button fx:id="removeTaskToBeCarryOut" mnemonicParsing="false" />
+            <Button fx:id="validateTaskToBeCarryOut" mnemonicParsing="false" onAction="#onValidateTaskToBeCarryOutAction" />
+            <Button fx:id="updateTaskToBeCarryOut" mnemonicParsing="false" onAction="#onUpdateTaskToBeCarryOutAction" />
+            <Button fx:id="removeTaskToBeCarryOut" mnemonicParsing="false" onAction="#onRemoveTaskToBeCarryOutAction" />
          </children>
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
