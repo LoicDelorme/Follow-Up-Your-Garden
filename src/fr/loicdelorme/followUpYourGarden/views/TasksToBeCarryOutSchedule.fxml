@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu fx:id="actions" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="quit" mnemonicParsing="false" />
+            </items>
+          </Menu>
+          <Menu fx:id="typeOfPlants" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="addTypeOfPlants" mnemonicParsing="false" />
+                  <MenuItem fx:id="updateTypeOfPlants" mnemonicParsing="false" />
+                  <MenuItem fx:id="removeTypeOfPlants" mnemonicParsing="false" />
+            </items>
+          </Menu>
+          <Menu fx:id="typeOfTasks" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="addTypeOfTasks" mnemonicParsing="false" />
+                  <MenuItem fx:id="updateTypeOfTasks" mnemonicParsing="false" />
+                  <MenuItem fx:id="removeTypeOfTasks" mnemonicParsing="false" />
+            </items>
+          </Menu>
+            <Menu fx:id="help" mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="documentation" mnemonicParsing="false" />
+                  <MenuItem fx:id="about" mnemonicParsing="false" />
+               </items>
+            </Menu>
+        </menus>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </MenuBar>
+      <HBox spacing="15.0">
+         <children>
+            <Button fx:id="validateTaskToBeCarryOut" mnemonicParsing="false" />
+            <Button fx:id="updateTaskToBeCarryOut" mnemonicParsing="false" />
+            <Button fx:id="removeTaskToBeCarryOut" mnemonicParsing="false" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="400.0" prefWidth="1200.0">
+         <children>
+            <TableView fx:id="schedule" prefHeight="400.0" prefWidth="1170.0">
+              <columns>
+                <TableColumn fx:id="groupOfPlantsColumn" minWidth="-1.0" prefWidth="195.0" />
+                <TableColumn fx:id="typeOfTasksColumn" minWidth="-1.0" prefWidth="195.0" />
+                  <TableColumn fx:id="deadlineDateColumn" minWidth="-1.0" prefWidth="195.0" />
+                  <TableColumn fx:id="priorityColumn" minWidth="-1.0" prefWidth="195.0" />
+                  <TableColumn fx:id="currentProgressionColumn" minWidth="-1.0" prefWidth="195.0" />
+                  <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="195.0" />
+              </columns>
+            </TableView>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
