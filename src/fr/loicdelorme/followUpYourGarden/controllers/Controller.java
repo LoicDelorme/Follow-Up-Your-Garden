@@ -1,7 +1,10 @@
 package fr.loicdelorme.followUpYourGarden.controllers;
 
+import java.util.UUID;
+
 import javafx.scene.control.Alert;
 import fr.loicdelorme.followUpYourGarden.core.helpers.DialogsHelper;
+import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
 
 /**
  * This class allow you to display information.
@@ -41,5 +44,20 @@ public class Controller
 	{
 		Alert alert = DialogsHelper.generateErrorDialog(title, header, content);
 		alert.showAndWait();
+	}
+
+	/**
+	 * Save the error.
+	 * 
+	 * @param path
+	 *            The path.
+	 * @param extension
+	 *            The extension.
+	 * @param exception
+	 *            The exception.
+	 */
+	protected void saveError(String path, String extension, Exception exception)
+	{
+		FileWriterHelper.writeContent(path, UUID.randomUUID().toString(), extension, exception.getMessage());
 	}
 }
