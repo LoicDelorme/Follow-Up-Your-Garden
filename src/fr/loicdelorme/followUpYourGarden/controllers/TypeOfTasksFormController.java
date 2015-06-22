@@ -2,17 +2,14 @@ package fr.loicdelorme.followUpYourGarden.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.UUID;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import fr.loicdelorme.followUpYourGarden.core.helpers.DialogsHelper;
-import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
 import fr.loicdelorme.followUpYourGarden.core.services.TypeOfTasksServices;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidTypeOfTasksDescriptionException;
@@ -28,7 +25,7 @@ import fr.loicdelorme.followUpYourGarden.core.services.exceptions.MissingTypeOfT
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class TypeOfTasksFormController
+public class TypeOfTasksFormController extends Controller
 {
 	/**
 	 * The title.
@@ -37,10 +34,22 @@ public class TypeOfTasksFormController
 	private Label title;
 
 	/**
+	 * The wording label.
+	 */
+	@FXML
+	private Label wordingLabel;
+
+	/**
 	 * The wording.
 	 */
 	@FXML
 	private TextField wording;
+
+	/**
+	 * The description label.
+	 */
+	@FXML
+	private Label descriptionLabel;
 
 	/**
 	 * The description.
@@ -81,35 +90,50 @@ public class TypeOfTasksFormController
 	private Stage stage;
 
 	/**
+	 * The bundle.
+	 */
+	private ResourceBundle bundle;
+
+	/**
 	 * Create a type of tasks form controller.
 	 * 
-	 * @param title
-	 *            The title.
 	 * @param typeOfTasks
 	 *            The type of tasks.
 	 * @param typeOfTasksServices
 	 *            The type of tasks services.
 	 * @param stage
 	 *            The stage.
+	 * @param bundle
+	 *            The bundle.
 	 */
-	public TypeOfTasksFormController(String title, TypeOfTasks typeOfTasks, TypeOfTasksServices typeOfTasksServices, Stage stage)
+	public TypeOfTasksFormController(TypeOfTasks typeOfTasks, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
 	{
-		this.title.setText(title);
-
-		if (typeOfTasks != null)
-		{
-			this.wording.setText(typeOfTasks.getWording());
-			this.description.setText(typeOfTasks.getDescription());
-			this.isUpdateForm = true;
-		}
-		else
-		{
-			this.isUpdateForm = false;
-		}
-
 		this.typeOfTasks = typeOfTasks;
 		this.typeOfTasksServices = typeOfTasksServices;
 		this.stage = stage;
+		this.bundle = bundle;
+
+		if (this.typeOfTasks == null)
+		{
+			this.title.setText(this.bundle.getString("typeOfTasksAdditionFormTitle"));
+			this.wording.setPromptText(this.bundle.getString("typeOfTasksWordingPromptText"));
+			this.description.setPromptText(this.bundle.getString("typeOfTasksDescriptionPromptText"));
+			this.isUpdateForm = false;
+		}
+		else
+		{
+			this.title.setText(this.bundle.getString("typeOfTasksModificationFormTitle"));
+			this.wording.setText(this.typeOfTasks.getWording());
+			this.description.setText(this.typeOfTasks.getDescription());
+			this.isUpdateForm = true;
+		}
+
+		this.wordingLabel.setText(this.bundle.getString("typeOfTasksWordingLabel"));
+		this.descriptionLabel.setText(this.bundle.getString("typeOfTasksDescriptionLabel"));
+		this.valid.setText(this.bundle.getString("typeOfTasksValidButton"));
+		this.cancel.setText(this.bundle.getString("typeOfTasksCancelButton"));
+
+		this.stage.setResizable(false);
 	}
 
 	/**
@@ -122,47 +146,34 @@ public class TypeOfTasksFormController
 			if (this.isUpdateForm)
 			{
 				this.typeOfTasksServices.updateTypeOfTasks(this.wording.getText(), this.description.getText(), this.typeOfTasks);
-
-				Alert alert = DialogsHelper.generateInformationDialog(IContentController.OPERATION_SUCCESS_TITLE, "The type of tasks was updated!");
-				alert.showAndWait();
-
+				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfTasksModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
 				this.typeOfTasksServices.addTypeOfTasks(this.wording.getText(), this.description.getText());
-
-				Alert alert = DialogsHelper.generateInformationDialog(IContentController.OPERATION_SUCCESS_TITLE, "The type of tasks was added!");
-				alert.showAndWait();
-
+				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfTasksAdditionSuccess"));
 				this.stage.close();
 			}
 		}
 		catch (MissingTypeOfTasksIdException | MissingTypeOfTasksWordingException | MissingTypeOfTasksDescriptionException | InvalidTypeOfTasksIdException | InvalidTypeOfTasksWordingException | InvalidTypeOfTasksDescriptionException e)
 		{
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.FORM_DATA_EXCEPTION_TITLE, IContentController.FORM_DATA_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.displayError(this.bundle.getString("invalidFormTitle"), this.bundle.getString("invalidFormHeader"), e.getMessage());
 		}
 		catch (ClassNotFoundException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.CLASS_NOT_FOUND_EXCEPTION_TITLE, IContentController.CLASS_NOT_FOUND_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("driverErrorTitle"), this.bundle.getString("driverErrorHeader"), e.getMessage());
 		}
 		catch (SQLException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.SQL_EXCEPTION_TITLE, IContentController.SQL_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("sqlErrorTitle"), this.bundle.getString("sqlErrorHeader"), e.getMessage());
 		}
 		catch (IOException e)
 		{
-			FileWriterHelper.writeContent(IContentController.ERROR_FILE_PATH, UUID.randomUUID().toString(), IContentController.ERROR_FILE_EXTENSION, e.getMessage());
-
-			Alert alert = DialogsHelper.generateErrorDialog(IContentController.IO_EXCEPTION_TITLE, IContentController.IO_EXCEPTION_HEADER, e.getMessage());
-			alert.showAndWait();
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
+			this.displayError(this.bundle.getString("ioErrorTitle"), this.bundle.getString("ioErrorHeader"), e.getMessage());
 		}
 	}
 
