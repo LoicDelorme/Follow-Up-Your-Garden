@@ -80,7 +80,7 @@ public class TypeOfPlantsFormController extends Controller
 	private ResourceBundle bundle;
 
 	/**
-	 * Create a type of plants form controller.
+	 * Initialize data.
 	 * 
 	 * @param typeOfPlants
 	 *            The type of plants.
@@ -91,7 +91,7 @@ public class TypeOfPlantsFormController extends Controller
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public TypeOfPlantsFormController(TypeOfPlants typeOfPlants, TypeOfPlantsServices typeOfPlantsServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(TypeOfPlants typeOfPlants, TypeOfPlantsServices typeOfPlantsServices, Stage stage, ResourceBundle bundle)
 	{
 		this.typeOfPlants = typeOfPlants;
 		this.typeOfPlantsServices = typeOfPlantsServices;
