@@ -1,7 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.models;
 
 /**
- * This class allow you to handle several priorities.
+ * This enumeration allow you to handle several priorities.
  * 
  * @author DELORME Loïc
  * @version 1.0.0
