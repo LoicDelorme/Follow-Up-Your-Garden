@@ -70,16 +70,6 @@ public class TypeOfPlantsFormController extends Controller
 	private TypeOfPlantsServices typeOfPlantsServices;
 
 	/**
-	 * The stage.
-	 */
-	private Stage stage;
-
-	/**
-	 * The bundle.
-	 */
-	private ResourceBundle bundle;
-
-	/**
 	 * Initialize data.
 	 * 
 	 * @param typeOfPlants
@@ -142,20 +132,9 @@ public class TypeOfPlantsFormController extends Controller
 		{
 			this.displayError(this.bundle.getString("invalidFormTitle"), this.bundle.getString("invalidFormHeader"), e.getMessage());
 		}
-		catch (ClassNotFoundException e)
+		catch (ClassNotFoundException | SQLException | IOException e)
 		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
-			this.displayError(this.bundle.getString("driverErrorTitle"), this.bundle.getString("driverErrorHeader"), e.getMessage());
-		}
-		catch (SQLException e)
-		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
-			this.displayError(this.bundle.getString("sqlErrorTitle"), this.bundle.getString("sqlErrorHeader"), e.getMessage());
-		}
-		catch (IOException e)
-		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), e);
-			this.displayError(this.bundle.getString("ioErrorTitle"), this.bundle.getString("ioErrorHeader"), e.getMessage());
+			this.processException(e);
 		}
 	}
 
