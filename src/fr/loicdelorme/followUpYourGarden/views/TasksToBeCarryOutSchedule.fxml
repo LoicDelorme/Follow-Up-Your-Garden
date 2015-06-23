@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.loicdelorme.followUpYourGarden.controllers.TaskToBeCarryOutScheduleController">
+<VBox prefHeight="500.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.loicdelorme.followUpYourGarden.controllers.TaskToBeCarryOutScheduleController">
    <children>
       <MenuBar>
         <menus>
@@ -53,9 +53,9 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="400.0" prefWidth="1200.0">
+      <HBox>
          <children>
-            <TableView fx:id="schedule" prefHeight="400.0" prefWidth="1170.0">
+            <TableView fx:id="schedule" prefHeight="400.0" prefWidth="1172.0">
               <columns>
                 <TableColumn fx:id="groupOfPlantsColumn" minWidth="-1.0" prefWidth="195.0" />
                 <TableColumn fx:id="typeOfTasksColumn" minWidth="-1.0" prefWidth="195.0" />
