@@ -202,14 +202,17 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	 *            The type of plants services.
 	 * @param typeOfTasksServices
 	 *            The type of tasks services.
+	 * @param stage
+	 *            The stage.
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public void initializeData(TaskToBeCarryOutServices taskToBeCarryOutServices, TypeOfPlantsServices typeOfPlantsServices, TypeOfTasksServices typeOfTasksServices, ResourceBundle bundle)
+	public void initializeData(TaskToBeCarryOutServices taskToBeCarryOutServices, TypeOfPlantsServices typeOfPlantsServices, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
 	{
 		this.taskToBeCarryOutServices = taskToBeCarryOutServices;
 		this.typeOfPlantsServices = typeOfPlantsServices;
 		this.typeOfTasksServices = typeOfTasksServices;
+		this.stage = stage;
 		this.bundle = bundle;
 
 		this.actions.setText(this.bundle.getString("taskToBeCarryOutScheduleMenuActions"));
@@ -247,6 +250,8 @@ public class TaskToBeCarryOutScheduleController extends Controller
 
 		this.schedule.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		updateSchedule();
+
+		this.stage.setResizable(false);
 	}
 
 	/**
