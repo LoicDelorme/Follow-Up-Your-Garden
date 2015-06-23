@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import fr.loicdelorme.followUpYourGarden.core.helpers.DialogsHelper;
 import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
 
@@ -21,6 +22,11 @@ public class Controller
 	 * The bundle.
 	 */
 	protected ResourceBundle bundle;
+
+	/**
+	 * The stage.
+	 */
+	protected Stage stage;
 
 	/**
 	 * Display an information.
