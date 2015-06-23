@@ -18,7 +18,7 @@ import fr.loicdelorme.followUpYourGarden.core.models.ContentSelectorType;
  * @param <T>
  *            The type of content.
  */
-public class ContentSelectorController<T>
+public class ContentSelectorController<T> extends Controller
 {
 	/**
 	 * The title.
@@ -48,16 +48,6 @@ public class ContentSelectorController<T>
 	 * The selected value.
 	 */
 	private T selectedValue;
-
-	/**
-	 * The stage.
-	 */
-	private Stage stage;
-
-	/**
-	 * The bundle.
-	 */
-	private ResourceBundle bundle;
 
 	/**
 	 * Initialize data.
