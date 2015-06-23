@@ -154,7 +154,7 @@ public class TypeOfTasksServices
 			sourceManipulator.openConnection();
 
 			this.typeOfTasksManipulator.setConnection(sourceManipulator.getConnection());
-			this.typeOfTasksManipulator.addTypeOfTasks(newTypeOfTasks);
+			this.typeOfTasksManipulator.updateTypeOfTasks(newTypeOfTasks);
 
 			sourceManipulator.closeConnection();
 		}
