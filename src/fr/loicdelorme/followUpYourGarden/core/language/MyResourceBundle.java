@@ -37,7 +37,7 @@ public class MyResourceBundle
 			ILanguageReader languageReader = new LanguagePropertiesReader();
 			String[] language = languageReader.getLanguage().split("_");
 
-			resourceBundle = ResourceBundle.getBundle("./data/bundles/followUpYourGarden", new Locale(language[0], language[1]));
+			resourceBundle = ResourceBundle.getBundle("fr/loicdelorme/followUpYourGarden/views/resources/followUpYourGarden", new Locale(language[0], language[1]));
 		}
 
 		return resourceBundle;
