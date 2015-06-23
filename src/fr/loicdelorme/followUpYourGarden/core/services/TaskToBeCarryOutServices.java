@@ -7,12 +7,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.loicdelorme.followUpYourGarden.core.database.MyDatabase;
+import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITaskToBeCarryOutManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfTasksManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.sources.ISourceManipulator;
+import fr.loicdelorme.followUpYourGarden.core.models.CarriedOutTask;
 import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.Priority;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
@@ -78,6 +80,11 @@ public class TaskToBeCarryOutServices
 	private ITypeOfPlantsManipulator typeOfPlantsManipulator;
 
 	/**
+	 * A carried out task manipulator.
+	 */
+	private ICarriedOutTaskManipulator carriedOutTaskManipulator;
+
+	/**
 	 * Create a task to be carry out services.
 	 * 
 	 * @param taskToBeCarryOutManipulator
@@ -90,14 +97,17 @@ public class TaskToBeCarryOutServices
 	 *            A position manipulator.
 	 * @param typeOfPlantsManipulator
 	 *            A type of plants manipulator.
+	 * @param carriedOutTaskManipulator
+	 *            A carried out task manipulator.
 	 */
-	public TaskToBeCarryOutServices(ITaskToBeCarryOutManipulator taskToBeCarryOutManipulator, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator)
+	public TaskToBeCarryOutServices(ITaskToBeCarryOutManipulator taskToBeCarryOutManipulator, IGroupOfPlantsManipulator groupOfPlantsManipulator, ITypeOfTasksManipulator typeOfTasksManipulator, IPositionManipulator positionManipulator, ITypeOfPlantsManipulator typeOfPlantsManipulator, ICarriedOutTaskManipulator carriedOutTaskManipulator)
 	{
 		this.taskToBeCarryOutManipulator = taskToBeCarryOutManipulator;
 		this.groupOfPlantsManipulator = groupOfPlantsManipulator;
 		this.typeOfTasksManipulator = typeOfTasksManipulator;
 		this.positionManipulator = positionManipulator;
 		this.typeOfPlantsManipulator = typeOfPlantsManipulator;
+		this.carriedOutTaskManipulator = carriedOutTaskManipulator;
 	}
 
 	/**
@@ -249,6 +259,12 @@ public class TaskToBeCarryOutServices
 
 		if (!oldTaskToBeCarryOut.equals(newTaskToBeCarryOut))
 		{
+			if (newTaskToBeCarryOut.getCurrentProgression() == MAXIMAL_CURRENT_PROGRESSION_VALUE)
+			{
+				validateTaskToBeCarryOut(newTaskToBeCarryOut);
+				return;
+			}
+
 			ISourceManipulator sourceManipulator = MyDatabase.getInstance();
 			sourceManipulator.openConnection();
 
@@ -280,6 +296,39 @@ public class TaskToBeCarryOutServices
 
 		this.taskToBeCarryOutManipulator.setConnection(sourceManipulator.getConnection());
 		this.taskToBeCarryOutManipulator.removeTaskToBeCarryOut(taskToBeCarryOutToRemove);
+
+		sourceManipulator.closeConnection();
+	}
+
+	/**
+	 * Validate a task to be carry out.
+	 * 
+	 * @param taskToBeCarryOutToValidate
+	 *            The task to be carry out to validate.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 * @throws SQLException
+	 *             If an SQL exception is thrown.
+	 */
+	public void validateTaskToBeCarryOut(TaskToBeCarryOut taskToBeCarryOutToValidate) throws ClassNotFoundException, FileNotFoundException, IOException, SQLException
+	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.taskToBeCarryOutManipulator.setConnection(sourceManipulator.getConnection());
+		this.taskToBeCarryOutManipulator.removeTaskToBeCarryOut(taskToBeCarryOutToValidate);
+
+		this.carriedOutTaskManipulator.setConnection(sourceManipulator.getConnection());
+		this.carriedOutTaskManipulator.addCarriedOutTask(new CarriedOutTask(CarriedOutTask.UNKNOWN_CARRIED_OUT_TASK_ID, taskToBeCarryOutToValidate.getGroupOfPlants(), taskToBeCarryOutToValidate.getTypeOfTasks(), LocalDate.now(), taskToBeCarryOutToValidate.getDeadlineDate(), taskToBeCarryOutToValidate.getDescription()));
+
+		if (taskToBeCarryOutToValidate.getIsRecurrent())
+		{
+			this.taskToBeCarryOutManipulator.addTaskToBeCarryOut(new TaskToBeCarryOut(taskToBeCarryOutToValidate.getGroupOfPlants(), taskToBeCarryOutToValidate.getTypeOfTasks(), LocalDate.now().plusDays(taskToBeCarryOutToValidate.getPeriodicity()), taskToBeCarryOutToValidate.getPriority(), "", MINIMAL_CURRENT_PROGRESSION_VALUE, taskToBeCarryOutToValidate.getAnticipatedDuration(), taskToBeCarryOutToValidate.getIsRecurrent(), taskToBeCarryOutToValidate.getPeriodicity()));
+		}
 
 		sourceManipulator.closeConnection();
 	}
