@@ -117,13 +117,13 @@ public class TypeOfPlantsFormController extends Controller
 		{
 			if (this.isUpdateForm)
 			{
-				this.typeOfPlantsServices.updateTypeOfPlants(this.wording.getText(), this.typeOfPlants);
+				this.typeOfPlantsServices.updateTypeOfPlants(this.wording.getText().trim(), this.typeOfPlants);
 				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfPlantsModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
-				this.typeOfPlantsServices.addTypeOfPlants(this.wording.getText());
+				this.typeOfPlantsServices.addTypeOfPlants(this.wording.getText().trim());
 				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfPlantsAdditionSuccess"));
 				this.stage.close();
 			}
