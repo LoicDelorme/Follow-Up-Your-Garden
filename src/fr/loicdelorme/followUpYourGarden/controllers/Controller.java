@@ -1,5 +1,8 @@
 package fr.loicdelorme.followUpYourGarden.controllers;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javafx.scene.control.Alert;
@@ -14,6 +17,11 @@ import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
  */
 public class Controller
 {
+	/**
+	 * The bundle.
+	 */
+	protected ResourceBundle bundle;
+
 	/**
 	 * Display an information.
 	 * 
@@ -59,5 +67,32 @@ public class Controller
 	protected void saveError(String path, String extension, Exception exception)
 	{
 		FileWriterHelper.writeContent(path, UUID.randomUUID().toString(), extension, exception.getMessage());
+	}
+
+	/**
+	 * Process the exception.
+	 * 
+	 * @param exception
+	 *            The exception.
+	 */
+	protected void processException(Exception exception)
+	{
+		if (exception instanceof ClassNotFoundException)
+		{
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
+			this.displayError(this.bundle.getString("driverErrorTitle"), this.bundle.getString("driverErrorHeader"), exception.getMessage());
+		}
+
+		if (exception instanceof SQLException)
+		{
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
+			this.displayError(this.bundle.getString("sqlErrorTitle"), this.bundle.getString("sqlErrorHeader"), exception.getMessage());
+		}
+
+		if (exception instanceof IOException)
+		{
+			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
+			this.displayError(this.bundle.getString("ioErrorTitle"), this.bundle.getString("ioErrorHeader"), exception.getMessage());
+		}
 	}
 }
