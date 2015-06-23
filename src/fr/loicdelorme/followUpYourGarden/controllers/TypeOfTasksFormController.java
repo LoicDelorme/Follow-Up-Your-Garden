@@ -95,7 +95,7 @@ public class TypeOfTasksFormController extends Controller
 	private ResourceBundle bundle;
 
 	/**
-	 * Create a type of tasks form controller.
+	 * Initialize data.
 	 * 
 	 * @param typeOfTasks
 	 *            The type of tasks.
@@ -106,7 +106,7 @@ public class TypeOfTasksFormController extends Controller
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public TypeOfTasksFormController(TypeOfTasks typeOfTasks, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(TypeOfTasks typeOfTasks, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
 	{
 		this.typeOfTasks = typeOfTasks;
 		this.typeOfTasksServices = typeOfTasksServices;
