@@ -17,7 +17,7 @@ public class InvalidGroupOfPlantsRedLevelException extends Exception
 	 * @param redLevelValue
 	 *            The invalid red level.
 	 */
-	public InvalidGroupOfPlantsRedLevelException(int redLevelValue)
+	public InvalidGroupOfPlantsRedLevelException(double redLevelValue)
 	{
 		super(String.format(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsRedLevelException"), redLevelValue));
 	}
