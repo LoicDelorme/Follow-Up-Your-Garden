@@ -98,7 +98,7 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		while (resultSet.next())
 		{
 			id = resultSet.getInt(COLUMNS_NAMES[0]);
-			groupsOfPlants.add(new GroupOfPlants(id, resultSet.getString(COLUMNS_NAMES[1]), resultSet.getDate(COLUMNS_NAMES[2]).toLocalDate(), resultSet.getString(COLUMNS_NAMES[3]), Color.rgb(resultSet.getInt(COLUMNS_NAMES[4]), resultSet.getInt(COLUMNS_NAMES[5]), resultSet.getInt(COLUMNS_NAMES[6])), typeOfPlantsManipulator.getTypesOfPlants(id), positionManipulator.getPositions(id)));
+			groupsOfPlants.add(new GroupOfPlants(id, resultSet.getString(COLUMNS_NAMES[1]), resultSet.getDate(COLUMNS_NAMES[2]).toLocalDate(), resultSet.getString(COLUMNS_NAMES[3]), new Color(resultSet.getDouble(COLUMNS_NAMES[4]), resultSet.getDouble(COLUMNS_NAMES[5]), resultSet.getDouble(COLUMNS_NAMES[6]), 1), typeOfPlantsManipulator.getTypesOfPlants(id), positionManipulator.getPositions(id)));
 		}
 
 		groupsOfPlants.sort(null);
@@ -121,7 +121,7 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		positionManipulator.setConnection(this.connection);
 		typeOfPlantsManipulator.setConnection(this.connection);
 
-		GroupOfPlants groupOfPlants = new GroupOfPlants(resultSet.getInt(COLUMNS_NAMES[0]), resultSet.getString(COLUMNS_NAMES[1]), resultSet.getDate(COLUMNS_NAMES[2]).toLocalDate(), resultSet.getString(COLUMNS_NAMES[3]), Color.rgb(resultSet.getInt(COLUMNS_NAMES[4]), resultSet.getInt(COLUMNS_NAMES[5]), resultSet.getInt(COLUMNS_NAMES[6])), typeOfPlantsManipulator.getTypesOfPlants(groupOfPlantsId), positionManipulator.getPositions(groupOfPlantsId));
+		GroupOfPlants groupOfPlants = new GroupOfPlants(resultSet.getInt(COLUMNS_NAMES[0]), resultSet.getString(COLUMNS_NAMES[1]), resultSet.getDate(COLUMNS_NAMES[2]).toLocalDate(), resultSet.getString(COLUMNS_NAMES[3]), new Color(resultSet.getDouble(COLUMNS_NAMES[4]), resultSet.getDouble(COLUMNS_NAMES[5]), resultSet.getDouble(COLUMNS_NAMES[6]), 1), typeOfPlantsManipulator.getTypesOfPlants(groupOfPlantsId), positionManipulator.getPositions(groupOfPlantsId));
 
 		return groupOfPlants;
 	}
@@ -138,9 +138,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		statement.setString(1, groupOfPlants.getWording());
 		statement.setString(2, groupOfPlants.getPlantingDate().toString());
 		statement.setString(3, groupOfPlants.getPath());
-		statement.setInt(4, ((int) groupOfPlants.getIconColor().getRed() * 255));
-		statement.setInt(5, ((int) groupOfPlants.getIconColor().getGreen() * 255));
-		statement.setInt(6, ((int) groupOfPlants.getIconColor().getBlue() * 255));
+		statement.setDouble(4, groupOfPlants.getIconColor().getRed());
+		statement.setDouble(5, groupOfPlants.getIconColor().getGreen());
+		statement.setDouble(6, groupOfPlants.getIconColor().getBlue());
 
 		statement.executeUpdate();
 
@@ -169,9 +169,9 @@ public class GroupOfPlantsDatabaseManipulator implements IGroupOfPlantsManipulat
 		statement.setString(1, groupOfPlants.getWording());
 		statement.setString(2, groupOfPlants.getPlantingDate().toString());
 		statement.setString(3, groupOfPlants.getPath());
-		statement.setInt(4, ((int) groupOfPlants.getIconColor().getRed() * 255));
-		statement.setInt(5, ((int) groupOfPlants.getIconColor().getGreen() * 255));
-		statement.setInt(6, ((int) groupOfPlants.getIconColor().getBlue() * 255));
+		statement.setDouble(4, groupOfPlants.getIconColor().getRed());
+		statement.setDouble(5, groupOfPlants.getIconColor().getGreen());
+		statement.setDouble(6, groupOfPlants.getIconColor().getBlue());
 		statement.setInt(7, groupOfPlants.getId());
 
 		statement.executeUpdate();
