@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the description attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingCarriedOutTaskDescriptionException extends Exception
 	 */
 	public MissingCarriedOutTaskDescriptionException()
 	{
-		super("The description is missing!");
+		super(MyResourceBundle.getBundle().getString("missingCarriedOutTaskDescriptionException"));
 	}
 }
