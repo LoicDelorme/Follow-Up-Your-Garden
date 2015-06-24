@@ -361,7 +361,7 @@ public class TaskToBeCarryOutScheduleController extends Controller
 			try
 			{
 				this.typeOfPlantsServices.removeTypeOfPlants(typeOfPlantsToRemove);
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfPlantsRemovalSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfPlantsRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e2)
 			{
@@ -470,7 +470,7 @@ public class TaskToBeCarryOutScheduleController extends Controller
 			try
 			{
 				this.typeOfTasksServices.removeTypeOfTasks(typeOfTasksToRemove);
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfTasksRemovalSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfTasksRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
 			{
@@ -484,7 +484,7 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	 */
 	public void onDocumentationAction()
 	{
-		this.displayInformation(this.bundle.getString("documentationTitle"), null, this.bundle.getString("documentationContent"));
+		this.displayInformation(this.bundle.getString("documentationTitle"), this.bundle.getString("documentationContent"));
 	}
 
 	/**
@@ -505,7 +505,7 @@ public class TaskToBeCarryOutScheduleController extends Controller
 		try
 		{
 			this.taskToBeCarryOutServices.validateTaskToBeCarryOut(selectedTaskToBeCarryOut);
-			this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("taskToBeCarryOutValidateSuccess"));
+			this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutValidateSuccess"));
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
