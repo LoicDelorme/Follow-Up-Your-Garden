@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the wording value is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidTypeOfPlantsWordingException extends Exception
 	 */
 	public InvalidTypeOfPlantsWordingException()
 	{
-		super("The wording is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidTypeOfPlantsWordingException"));
 	}
 }
