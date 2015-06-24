@@ -16,8 +16,8 @@ INSERT INTO Priority (wording) VALUES ("HIGH");
 INSERT INTO Priority (wording) VALUES ("MEDIUM");
 INSERT INTO Priority (wording) VALUES ("LOW");
 
-INSERT INTO GroupOfPlants (wording, planting_date, path, r_level, g_level, b_level) VALUES ("trees", "2015-03-06", "C://", 0, 255, 255);
-INSERT INTO GroupOfPlants (wording, planting_date, path, r_level, g_level, b_level) VALUES ("kitchen garden", "2015-03-06", "D://", 0, 255, 255);
+INSERT INTO GroupOfPlants (wording, planting_date, path, r_level, g_level, b_level) VALUES ("trees", "2015-03-06", "C://", 0, 1, 1);
+INSERT INTO GroupOfPlants (wording, planting_date, path, r_level, g_level, b_level) VALUES ("kitchen garden", "2015-03-06", "D://", 0, 1, 1);
 
 INSERT INTO IsComposedOf (id_group_of_plants, id_type_of_plants) VALUES (1, 2);
 INSERT INTO IsComposedOf (id_group_of_plants, id_type_of_plants) VALUES (2, 3);
