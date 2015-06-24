@@ -256,13 +256,13 @@ public class GroupOfPlantsFormController extends Controller
 			if (this.isUpdateForm)
 			{
 				this.groupOfPlantsServices.updateGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), null, this.groupOfPlants);
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("groupOfPlantsModificationSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("groupOfPlantsModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
 				this.groupOfPlantsServices.addGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), null);
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("groupOfPlantsAdditionSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("groupOfPlantsAdditionSuccess"));
 				this.stage.close();
 			}
 		}
