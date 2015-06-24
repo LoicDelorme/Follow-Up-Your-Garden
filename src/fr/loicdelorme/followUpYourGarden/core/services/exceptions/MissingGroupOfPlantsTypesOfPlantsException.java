@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the typesOfPlants attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingGroupOfPlantsTypesOfPlantsException extends Exception
 	 */
 	public MissingGroupOfPlantsTypesOfPlantsException()
 	{
-		super("The types of plants is missing!");
+		super(MyResourceBundle.getBundle().getString("missingGroupOfPlantsTypesOfPlantsException"));
 	}
 }
