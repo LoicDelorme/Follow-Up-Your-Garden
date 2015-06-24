@@ -1,6 +1,5 @@
 package fr.loicdelorme.followUpYourGarden.core.language;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -25,16 +24,21 @@ public class MyResourceBundle
 	 * Get an instance of my resource bundle.
 	 * 
 	 * @return An instance of my resource bundle.
-	 * @throws FileNotFoundException
-	 *             If the file is not found.
-	 * @throws IOException
-	 *             If the file can't be opened.
 	 */
-	public static ResourceBundle getBundle() throws FileNotFoundException, IOException
+	public static ResourceBundle getBundle()
 	{
 		if (resourceBundle == null)
 		{
-			ILanguageReader languageReader = new LanguagePropertiesReader();
+			ILanguageReader languageReader = null;
+			try
+			{
+				languageReader = new LanguagePropertiesReader();
+			}
+			catch (IOException e)
+			{
+				// Nothing.
+			}
+
 			String[] language = languageReader.getLanguage().split("_");
 
 			resourceBundle = ResourceBundle.getBundle("fr/loicdelorme/followUpYourGarden/views/resources/followUpYourGarden", new Locale(language[0], language[1]));
