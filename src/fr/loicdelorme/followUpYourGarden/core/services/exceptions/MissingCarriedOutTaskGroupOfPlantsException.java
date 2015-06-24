@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the groupOfPlants attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingCarriedOutTaskGroupOfPlantsException extends Exception
 	 */
 	public MissingCarriedOutTaskGroupOfPlantsException()
 	{
-		super("The group of plants is missing!");
+		super(MyResourceBundle.getBundle().getString("missingCarriedOutTaskGroupOfPlantsException"));
 	}
 }
