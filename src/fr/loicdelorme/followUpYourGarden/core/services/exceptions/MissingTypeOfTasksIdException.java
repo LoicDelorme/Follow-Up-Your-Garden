@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the id attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTypeOfTasksIdException extends Exception
 	 */
 	public MissingTypeOfTasksIdException()
 	{
-		super("The id is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTypeOfTasksIdException"));
 	}
 }
