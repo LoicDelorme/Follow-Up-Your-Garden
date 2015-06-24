@@ -17,7 +17,7 @@ public class InvalidGroupOfPlantsGreenLevelException extends Exception
 	 * @param greenLevelValue
 	 *            The invalid green level.
 	 */
-	public InvalidGroupOfPlantsGreenLevelException(int greenLevelValue)
+	public InvalidGroupOfPlantsGreenLevelException(double greenLevelValue)
 	{
 		super(String.format(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsGreenLevelException"), greenLevelValue));
 	}
