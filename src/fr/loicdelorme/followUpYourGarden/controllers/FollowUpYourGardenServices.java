@@ -30,41 +30,41 @@ public class FollowUpYourGardenServices
 	/**
 	 * The carried out task manipulator.
 	 */
-	private static final ICarriedOutTaskManipulator CARRIED_OUT_TASK_MANIPULATOR = new CarriedOutTaskDatabaseManipulator();
+	private final ICarriedOutTaskManipulator carriedOutTaskManipulator = new CarriedOutTaskDatabaseManipulator();
 
 	/**
 	 * The group of plants manipulator.
 	 */
-	private static final IGroupOfPlantsManipulator GROUP_OF_PLANTS_MANIPULATOR = new GroupOfPlantsDatabaseManipulator();
+	private final IGroupOfPlantsManipulator groupOfPlantsManipulator = new GroupOfPlantsDatabaseManipulator();
 
 	/**
 	 * The position manipulator.
 	 */
-	private static final IPositionManipulator POSITION_MANIPULATOR = new PositionDatabaseManipulator();
+	private final IPositionManipulator positionManipulator = new PositionDatabaseManipulator();
 
 	/**
 	 * The task to be carry out manipulator.
 	 */
-	private static final ITaskToBeCarryOutManipulator TASK_TO_BE_CARRY_OUT_MANIPULATOR = new TaskToBeCarryOutDatabaseManipulator();
+	private final ITaskToBeCarryOutManipulator taskToBeCarryOutManipulator = new TaskToBeCarryOutDatabaseManipulator();
 
 	/**
 	 * The type of plants manipulator.
 	 */
-	private static final ITypeOfPlantsManipulator TYPE_OF_PLANTS_MANIPULATOR = new TypeOfPlantsDatabaseManipulator();
+	private final ITypeOfPlantsManipulator typeOfPlantsManipulator = new TypeOfPlantsDatabaseManipulator();
 
 	/**
 	 * The type of tasks manipulator.
 	 */
-	private static final ITypeOfTasksManipulator TYPE_OF_TASKS_MANIPULATOR = new TypeOfTasksDatabaseManipulator();
+	private final ITypeOfTasksManipulator typeOfTasksManipulator = new TypeOfTasksDatabaseManipulator();
 
 	/**
 	 * Get the carried out task services.
 	 * 
 	 * @return The carried out task services.
 	 */
-	public static CarriedOutTaskServices getCarriedOutTaskServices()
+	public CarriedOutTaskServices getCarriedOutTaskServices()
 	{
-		return new CarriedOutTaskServices(CARRIED_OUT_TASK_MANIPULATOR, GROUP_OF_PLANTS_MANIPULATOR, TYPE_OF_TASKS_MANIPULATOR, POSITION_MANIPULATOR, TYPE_OF_PLANTS_MANIPULATOR);
+		return new CarriedOutTaskServices(this.carriedOutTaskManipulator, this.groupOfPlantsManipulator, this.typeOfTasksManipulator, this.positionManipulator, this.typeOfPlantsManipulator);
 	}
 
 	/**
@@ -72,9 +72,9 @@ public class FollowUpYourGardenServices
 	 * 
 	 * @return The group of plants services.
 	 */
-	public static GroupOfPlantsServices getGroupOfPlantsServices()
+	public GroupOfPlantsServices getGroupOfPlantsServices()
 	{
-		return new GroupOfPlantsServices(GROUP_OF_PLANTS_MANIPULATOR, POSITION_MANIPULATOR, TYPE_OF_PLANTS_MANIPULATOR);
+		return new GroupOfPlantsServices(this.groupOfPlantsManipulator, this.positionManipulator, this.typeOfPlantsManipulator);
 	}
 
 	/**
@@ -82,9 +82,9 @@ public class FollowUpYourGardenServices
 	 * 
 	 * @return The position services.
 	 */
-	public static PositionServices getPositionServices()
+	public PositionServices getPositionServices()
 	{
-		return new PositionServices(POSITION_MANIPULATOR);
+		return new PositionServices(this.positionManipulator);
 	}
 
 	/**
@@ -92,9 +92,9 @@ public class FollowUpYourGardenServices
 	 * 
 	 * @return The task to be carry out services.
 	 */
-	public static TaskToBeCarryOutServices getTaskToBeCarryOutServices()
+	public TaskToBeCarryOutServices getTaskToBeCarryOutServices()
 	{
-		return new TaskToBeCarryOutServices(TASK_TO_BE_CARRY_OUT_MANIPULATOR, GROUP_OF_PLANTS_MANIPULATOR, TYPE_OF_TASKS_MANIPULATOR, POSITION_MANIPULATOR, TYPE_OF_PLANTS_MANIPULATOR, CARRIED_OUT_TASK_MANIPULATOR);
+		return new TaskToBeCarryOutServices(this.taskToBeCarryOutManipulator, this.groupOfPlantsManipulator, this.typeOfTasksManipulator, this.positionManipulator, this.typeOfPlantsManipulator, this.carriedOutTaskManipulator);
 	}
 
 	/**
@@ -102,9 +102,9 @@ public class FollowUpYourGardenServices
 	 * 
 	 * @return The type of plants services.
 	 */
-	public static TypeOfPlantsServices getTypeOfPlantsServices()
+	public TypeOfPlantsServices getTypeOfPlantsServices()
 	{
-		return new TypeOfPlantsServices(TYPE_OF_PLANTS_MANIPULATOR);
+		return new TypeOfPlantsServices(this.typeOfPlantsManipulator);
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class FollowUpYourGardenServices
 	 * 
 	 * @return The type of tasks services.
 	 */
-	public static TypeOfTasksServices getTypeOfTasksServices()
+	public TypeOfTasksServices getTypeOfTasksServices()
 	{
-		return new TypeOfTasksServices(TYPE_OF_TASKS_MANIPULATOR);
+		return new TypeOfTasksServices(this.typeOfTasksManipulator);
 	}
 }
