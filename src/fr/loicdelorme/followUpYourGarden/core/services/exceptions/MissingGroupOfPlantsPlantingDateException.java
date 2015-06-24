@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the plantingDate attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingGroupOfPlantsPlantingDateException extends Exception
 	 */
 	public MissingGroupOfPlantsPlantingDateException()
 	{
-		super("The planting date is missing!");
+		super(MyResourceBundle.getBundle().getString("missingGroupOfPlantsPlantingDateException"));
 	}
 }
