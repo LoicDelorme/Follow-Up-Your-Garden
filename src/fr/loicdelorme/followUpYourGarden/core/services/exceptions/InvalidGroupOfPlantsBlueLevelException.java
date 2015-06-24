@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the blue level is not between 0 and 255.
  * 
@@ -17,6 +19,6 @@ public class InvalidGroupOfPlantsBlueLevelException extends Exception
 	 */
 	public InvalidGroupOfPlantsBlueLevelException(int blueLevelValue)
 	{
-		super(new StringBuilder().append("The blue level (").append(blueLevelValue).append(") is not valid!").toString());
+		super(String.format(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsBlueLevelException"), blueLevelValue));
 	}
 }
