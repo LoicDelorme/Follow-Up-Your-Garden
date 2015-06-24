@@ -2,10 +2,12 @@ package fr.loicdelorme.followUpYourGarden.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import fr.loicdelorme.followUpYourGarden.core.helpers.DialogsHelper;
 import fr.loicdelorme.followUpYourGarden.core.helpers.FileWriterHelper;
@@ -27,6 +29,39 @@ public class Controller
 	 * The stage.
 	 */
 	protected Stage stage;
+
+	/**
+	 * Display a confirmation dialog.
+	 * 
+	 * @param title
+	 *            The title.
+	 * @param content
+	 *            The content.
+	 * @return True if the user click on Okay, else False.
+	 */
+	protected boolean displayConfirmationDialog(String title, String content)
+	{
+		return this.displayConfirmationDialog(title, null, content);
+	}
+
+	/**
+	 * Display a confirmation dialog.
+	 * 
+	 * @param title
+	 *            The title.
+	 * @param header
+	 *            The header.
+	 * @param content
+	 *            The content.
+	 * @return True if the user click on Okay, else False.
+	 */
+	protected boolean displayConfirmationDialog(String title, String header, String content)
+	{
+		Alert alert = DialogsHelper.generateConfirmationDialog(title, header, content);
+		Optional<ButtonType> result = alert.showAndWait();
+
+		return (result.get() == ButtonType.OK);
+	}
 
 	/**
 	 * Display an information.
