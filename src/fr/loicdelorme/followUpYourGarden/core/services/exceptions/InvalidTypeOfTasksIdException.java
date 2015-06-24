@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the id value is negative.
  * 
@@ -17,6 +19,6 @@ public class InvalidTypeOfTasksIdException extends Exception
 	 */
 	public InvalidTypeOfTasksIdException(int idValue)
 	{
-		super(new StringBuilder().append("The id (").append(idValue).append(") is not valid!").toString());
+		super(String.format(MyResourceBundle.getBundle().getString("invalidTypeOfTasksIdException"), idValue));
 	}
 }
