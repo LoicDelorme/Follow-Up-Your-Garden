@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the set of positions is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidGroupOfPlantsPositionsException extends Exception
 	 */
 	public InvalidGroupOfPlantsPositionsException()
 	{
-		super("The set of positions is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsPositionsException"));
 	}
 }
