@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the isRecurrent attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutIsRecurrentException extends Exception
 	 */
 	public MissingTaskToBeCarryOutIsRecurrentException()
 	{
-		super("The recurrent value is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutIsRecurrentException"));
 	}
 }
