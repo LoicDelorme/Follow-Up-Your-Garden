@@ -47,12 +47,12 @@ public class GroupOfPlantsServices
 	/**
 	 * The minimal level value.
 	 */
-	private static final int MINIMAL_LEVEL_VALUE = 0;
+	private static final double MINIMAL_LEVEL_VALUE = 0;
 
 	/**
 	 * The maximal level value.
 	 */
-	private static final int MAXIMAL_LEVEL_VALUE = 255;
+	private static final double MAXIMAL_LEVEL_VALUE = 1;
 
 	/**
 	 * A group of plants manipulator.
@@ -166,7 +166,8 @@ public class GroupOfPlantsServices
 	 * @throws IOException
 	 *             If the file can't be opened.
 	 */
-	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
+	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException,
+	        FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, path, iconColor, typesOfPlants, positions);
 
@@ -235,7 +236,8 @@ public class GroupOfPlantsServices
 	 * @throws IOException
 	 *             If the file can't be opened.
 	 */
-	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
+	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException,
+	        SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(oldGroupOfPlants.getId(), wording, plantingDate, path, iconColor, typesOfPlants, positions);
 
@@ -438,9 +440,9 @@ public class GroupOfPlantsServices
 	 */
 	private void checkValuesAreCorrects(Integer id, String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException
 	{
-		int redLevel = (int) (iconColor.getRed() * 255);
-		int greenLevel = (int) (iconColor.getGreen() * 255);
-		int blueLevel = (int) (iconColor.getBlue() * 255);
+		double redLevel = iconColor.getRed();
+		double greenLevel = iconColor.getGreen();
+		double blueLevel = iconColor.getBlue();
 
 		if ((id < MINIMAL_ID) && (id != GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID))
 		{
