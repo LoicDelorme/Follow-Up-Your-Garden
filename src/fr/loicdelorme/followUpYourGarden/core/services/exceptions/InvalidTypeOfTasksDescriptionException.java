@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the description value is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidTypeOfTasksDescriptionException extends Exception
 	 */
 	public InvalidTypeOfTasksDescriptionException()
 	{
-		super("The description is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidTypeOfTasksDescriptionException"));
 	}
 }
