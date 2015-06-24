@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the priority attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutPriorityException extends Exception
 	 */
 	public MissingTaskToBeCarryOutPriorityException()
 	{
-		super("The priority is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutPriorityException"));
 	}
 }
