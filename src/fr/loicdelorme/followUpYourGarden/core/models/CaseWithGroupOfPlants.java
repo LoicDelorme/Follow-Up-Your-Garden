@@ -22,12 +22,16 @@ public class CaseWithGroupOfPlants extends Case
 	 *            The position.
 	 * @param iconColor
 	 *            The icon color.
+	 * @param isActivated
+	 *            If it's activated.
+	 * @param isDisabled
+	 *            If it's disabled.
 	 * @param groupOfPlants
 	 *            The group of plants.
 	 */
-	public CaseWithGroupOfPlants(Position position, Color iconColor, GroupOfPlants groupOfPlants)
+	public CaseWithGroupOfPlants(Position position, Color iconColor, boolean isActivated, boolean isDisabled, GroupOfPlants groupOfPlants)
 	{
-		super(position, iconColor);
+		super(position, iconColor, isActivated, isDisabled);
 
 		this.groupOfPlants = groupOfPlants;
 	}
