@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the red level is not between 0 and 255.
  * 
@@ -17,6 +19,6 @@ public class InvalidGroupOfPlantsRedLevelException extends Exception
 	 */
 	public InvalidGroupOfPlantsRedLevelException(int redLevelValue)
 	{
-		super(new StringBuilder().append("The red level (").append(redLevelValue).append(") is not valid!").toString());
+		super(String.format(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsRedLevelException"), redLevelValue));
 	}
 }
