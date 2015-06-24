@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the deadlineDate attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutDeadlineDateException extends Exception
 	 */
 	public MissingTaskToBeCarryOutDeadlineDateException()
 	{
-		super("The deadline date is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutDeadlineDateException"));
 	}
 }
