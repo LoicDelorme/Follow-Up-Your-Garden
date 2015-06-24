@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the periodicity attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutPeriodicityException extends Exception
 	 */
 	public MissingTaskToBeCarryOutPeriodicityException()
 	{
-		super("The periodicity is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutPeriodicityException"));
 	}
 }
