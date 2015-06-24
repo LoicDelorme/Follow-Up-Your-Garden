@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the positions attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingGroupOfPlantsPositionsException extends Exception
 	 */
 	public MissingGroupOfPlantsPositionsException()
 	{
-		super("The positions is missing!");
+		super(MyResourceBundle.getBundle().getString("missingGroupOfPlantsPositionsException"));
 	}
 }
