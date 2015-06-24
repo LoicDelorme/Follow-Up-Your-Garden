@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the path attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingGroupOfPlantsPathException extends Exception
 	 */
 	public MissingGroupOfPlantsPathException()
 	{
-		super("The path is missing!");
+		super(MyResourceBundle.getBundle().getString("missingGroupOfPlantsPathException"));
 	}
 }
