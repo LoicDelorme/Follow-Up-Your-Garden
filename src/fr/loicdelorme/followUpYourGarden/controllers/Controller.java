@@ -33,6 +33,19 @@ public class Controller
 	 * 
 	 * @param title
 	 *            The title.
+	 * @param content
+	 *            The content.
+	 */
+	protected void displayInformation(String title, String content)
+	{
+		this.displayInformation(title, null, content);
+	}
+
+	/**
+	 * Display an information.
+	 * 
+	 * @param title
+	 *            The title.
 	 * @param header
 	 *            The header.
 	 * @param content
@@ -42,6 +55,19 @@ public class Controller
 	{
 		Alert alert = DialogsHelper.generateInformationDialog(title, header, content);
 		alert.showAndWait();
+	}
+
+	/**
+	 * Display an error.
+	 * 
+	 * @param title
+	 *            The title.
+	 * @param content
+	 *            The content.
+	 */
+	protected void displayError(String title, String content)
+	{
+		this.displayError(title, null, content);
 	}
 
 	/**
