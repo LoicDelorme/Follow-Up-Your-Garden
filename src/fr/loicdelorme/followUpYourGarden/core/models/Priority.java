@@ -11,17 +11,17 @@ public enum Priority
 	/**
 	 * The priority is high.
 	 */
-	HIGH(1, "high", "./data/images/priorities/high.png"),
+	HIGH(1, "high", "fr/loicdelorme/followUpYourGarden/views/images/priorities/high.png"),
 
 	/**
 	 * The priority is medium.
 	 */
-	MEDIUM(2, "medium", "./data/images/priorities/medium.png"),
+	MEDIUM(2, "medium", "fr/loicdelorme/followUpYourGarden/views/images/priorities/medium.png"),
 
 	/**
 	 * The priority is low.
 	 */
-	LOW(3, "low", "./data/images/priorities/low.png");
+	LOW(3, "low", "fr/loicdelorme/followUpYourGarden/views/images/priorities/low.png");
 
 	/**
 	 * The id.
