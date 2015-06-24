@@ -136,13 +136,13 @@ public class TypeOfTasksFormController extends Controller
 			if (this.isUpdateForm)
 			{
 				this.typeOfTasksServices.updateTypeOfTasks(this.wording.getText().trim(), this.description.getText().trim(), this.typeOfTasks);
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfTasksModificationSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfTasksModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
 				this.typeOfTasksServices.addTypeOfTasks(this.wording.getText().trim(), this.description.getText().trim());
-				this.displayInformation(this.bundle.getString("operationSuccess"), null, this.bundle.getString("typeOfTasksAdditionSuccess"));
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfTasksAdditionSuccess"));
 				this.stage.close();
 			}
 		}
