@@ -548,7 +548,6 @@ public class TaskToBeCarryOutScheduleController extends Controller
 		try
 		{
 			this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
-			this.schedule.getSelectionModel().clearSelection();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
