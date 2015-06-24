@@ -18,6 +18,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import fr.loicdelorme.followUpYourGarden.core.models.ContentSelectorType;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
@@ -233,12 +234,23 @@ public class TaskToBeCarryOutScheduleController extends Controller
 		this.updateTaskToBeCarryOut.setText(this.bundle.getString("taskToBeCarryOutScheduleUpdateButton"));
 		this.removeTaskToBeCarryOut.setText(this.bundle.getString("taskToBeCarryOutScheduleRemoveButton"));
 
+		this.validateTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/schedule/validate.png"));
+		this.updateTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/schedule/update.png"));
+		this.removeTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/schedule/delete.png"));
+
 		this.groupOfPlantsColumn.setText(this.bundle.getString("taskToBeCarryOutScheduleGroupOfPlantsColumn"));
 		this.typeOfTasksColumn.setText(this.bundle.getString("taskToBeCarryOutScheduleTypeOfTasksColumn"));
 		this.deadlineDateColumn.setText(this.bundle.getString("taskToBeCarryOutScheduleDeadlineDateColumn"));
 		this.priorityColumn.setText(this.bundle.getString("taskToBeCarryOutSchedulePriorityColumn"));
 		this.currentProgressionColumn.setText(this.bundle.getString("taskToBeCarryOutScheduleCurrentProgressionColumn"));
 		this.descriptionColumn.setText(this.bundle.getString("taskToBeCarryOutScheduleDescriptionColumn"));
+
+		this.groupOfPlantsColumn.setResizable(false);
+		this.typeOfTasksColumn.setResizable(false);
+		this.deadlineDateColumn.setResizable(false);
+		this.priorityColumn.setResizable(false);
+		this.currentProgressionColumn.setResizable(false);
+		this.descriptionColumn.setResizable(false);
 
 		this.groupOfPlantsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGroupOfPlants().getWording()));
 		this.typeOfTasksColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeOfTasks().getWording()));
@@ -259,7 +271,7 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	 */
 	public void onQuitAction()
 	{
-		System.exit(0);
+		this.stage.close();
 	}
 
 	/**
@@ -543,18 +555,21 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	 */
 	public void onRemoveTaskToBeCarryOutAction()
 	{
-		TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
-
-		try
+		if (this.displayConfirmationDialog(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalQuestion")))
 		{
-			this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
-		}
-		catch (ClassNotFoundException | SQLException | IOException e)
-		{
-			this.processException(e);
-		}
+			TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
 
-		updateSchedule();
+			try
+			{
+				this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
+			}
+			catch (ClassNotFoundException | SQLException | IOException e)
+			{
+				this.processException(e);
+			}
+
+			updateSchedule();
+		}
 	}
 
 	/**
