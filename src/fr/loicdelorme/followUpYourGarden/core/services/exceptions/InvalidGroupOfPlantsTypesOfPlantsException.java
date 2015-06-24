@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the set of types of plants is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidGroupOfPlantsTypesOfPlantsException extends Exception
 	 */
 	public InvalidGroupOfPlantsTypesOfPlantsException()
 	{
-		super("The set of types of plants is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsTypesOfPlantsException"));
 	}
 }
