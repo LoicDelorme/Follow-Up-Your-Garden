@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the carriedOutDate attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingCarriedOutTaskCarriedOutDateException extends Exception
 	 */
 	public MissingCarriedOutTaskCarriedOutDateException()
 	{
-		super("The carried out date is missing!");
+		super(MyResourceBundle.getBundle().getString("missingCarriedOutTaskCarriedOutDateException"));
 	}
 }
