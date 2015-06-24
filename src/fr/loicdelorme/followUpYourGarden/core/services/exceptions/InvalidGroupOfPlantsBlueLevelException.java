@@ -17,7 +17,7 @@ public class InvalidGroupOfPlantsBlueLevelException extends Exception
 	 * @param blueLevelValue
 	 *            The invalid blue level.
 	 */
-	public InvalidGroupOfPlantsBlueLevelException(int blueLevelValue)
+	public InvalidGroupOfPlantsBlueLevelException(double blueLevelValue)
 	{
 		super(String.format(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsBlueLevelException"), blueLevelValue));
 	}
