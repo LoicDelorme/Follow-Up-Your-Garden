@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the path is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidGroupOfPlantsPathException extends Exception
 	 */
 	public InvalidGroupOfPlantsPathException()
 	{
-		super("The path is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsPathException"));
 	}
 }
