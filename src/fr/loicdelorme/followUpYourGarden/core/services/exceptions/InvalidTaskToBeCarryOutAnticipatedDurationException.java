@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the anticipatedDuration value is negative.
  * 
@@ -17,6 +19,6 @@ public class InvalidTaskToBeCarryOutAnticipatedDurationException extends Excepti
 	 */
 	public InvalidTaskToBeCarryOutAnticipatedDurationException(double anticipatedDurationValue)
 	{
-		super(new StringBuilder().append("The anticipated duration (").append(anticipatedDurationValue).append(") is not valid!").toString());
+		super(String.format(MyResourceBundle.getBundle().getString("invalidTaskToBeCarryOutAnticipatedDurationException"), anticipatedDurationValue));
 	}
 }
