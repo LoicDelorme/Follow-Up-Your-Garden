@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the wording is empty.
  * 
@@ -14,6 +16,6 @@ public class InvalidGroupOfPlantsWordingException extends Exception
 	 */
 	public InvalidGroupOfPlantsWordingException()
 	{
-		super("The wording is empty!");
+		super(MyResourceBundle.getBundle().getString("invalidGroupOfPlantsWordingException"));
 	}
 }
