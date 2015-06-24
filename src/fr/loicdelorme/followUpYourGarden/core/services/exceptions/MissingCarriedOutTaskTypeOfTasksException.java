@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the typeOfTasks attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingCarriedOutTaskTypeOfTasksException extends Exception
 	 */
 	public MissingCarriedOutTaskTypeOfTasksException()
 	{
-		super("The type of tasks is missing!");
+		super(MyResourceBundle.getBundle().getString("missingCarriedOutTaskTypeOfTasksException"));
 	}
 }
