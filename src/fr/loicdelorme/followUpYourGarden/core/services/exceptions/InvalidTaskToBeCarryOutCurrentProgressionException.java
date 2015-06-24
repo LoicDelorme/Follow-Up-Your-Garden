@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the currentProgression value is negative or higher than one hundred.
  * 
@@ -17,6 +19,6 @@ public class InvalidTaskToBeCarryOutCurrentProgressionException extends Exceptio
 	 */
 	public InvalidTaskToBeCarryOutCurrentProgressionException(int currentProgressionValue)
 	{
-		super(new StringBuilder().append("The current progression (").append(currentProgressionValue).append(") is not valid!").toString());
+		super(String.format(MyResourceBundle.getBundle().getString("invalidTaskToBeCarryOutCurrentProgressionException"), currentProgressionValue));
 	}
 }
