@@ -22,17 +22,33 @@ public class Case extends Button implements Comparable<Case>
 	private final Color iconColor;
 
 	/**
+	 * If it's activated.
+	 */
+	private boolean isActivated;
+
+	/**
+	 * If it's disabled.
+	 */
+	private boolean isDisabled;
+
+	/**
 	 * Create a case.
 	 * 
 	 * @param position
 	 *            The position.
 	 * @param iconColor
 	 *            The icon color.
+	 * @param isActivated
+	 *            If it's activated.
+	 * @param isDisabled
+	 *            If it's disabled.
 	 */
-	public Case(Position position, Color iconColor)
+	public Case(Position position, Color iconColor, boolean isActivated, boolean isDisabled)
 	{
 		this.position = position;
 		this.iconColor = iconColor;
+		this.isActivated = isActivated;
+		this.isDisabled = isDisabled;
 	}
 
 	/**
@@ -53,6 +69,37 @@ public class Case extends Button implements Comparable<Case>
 	public Color getIconColor()
 	{
 		return this.iconColor;
+	}
+
+	/**
+	 * Get if it's activated.
+	 * 
+	 * @return True if it's activated, else False.
+	 */
+	public boolean getIsActivated()
+	{
+		return this.isActivated;
+	}
+
+	/**
+	 * Get if it's disabled.
+	 * 
+	 * @return True if it's disabled, else False.
+	 */
+	public boolean getIsDisabled()
+	{
+		return this.isDisabled;
+	}
+
+	/**
+	 * Set if it's activated.
+	 * 
+	 * @param isActivated
+	 *            If it's is activated.
+	 */
+	public void setIsActivated(boolean isActivated)
+	{
+		this.isActivated = isActivated;
 	}
 
 	/**
