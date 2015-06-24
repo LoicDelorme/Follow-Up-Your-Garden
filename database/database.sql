@@ -29,9 +29,9 @@ CREATE TABLE GroupOfPlants
   wording VARCHAR(100) NOT NULL,
   planting_date Date NOT NULL,
   path VARCHAR(150) NOT NULL,
-  r_level INTEGER NOT NULL,
-  g_level INTEGER NOT NULL,
-  b_level INTEGER NOT NULL,
+  r_level DOUBLE NOT NULL,
+  g_level DOUBLE NOT NULL,
+  b_level DOUBLE NOT NULL,
   UNIQUE(wording)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
