@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the anticipatedDuration attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutAnticipatedDurationException extends Excepti
 	 */
 	public MissingTaskToBeCarryOutAnticipatedDurationException()
 	{
-		super("The anticipated duration is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutAnticipatedDurationException"));
 	}
 }
