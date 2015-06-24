@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the currentProgression attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTaskToBeCarryOutCurrentProgressionException extends Exceptio
 	 */
 	public MissingTaskToBeCarryOutCurrentProgressionException()
 	{
-		super("The current progression is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTaskToBeCarryOutCurrentProgressionException"));
 	}
 }
