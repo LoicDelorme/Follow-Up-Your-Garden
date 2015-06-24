@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.services.exceptions;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This exception is thrown if the wording attribute is missing.
  * 
@@ -14,6 +16,6 @@ public class MissingTypeOfPlantsWordingException extends Exception
 	 */
 	public MissingTypeOfPlantsWordingException()
 	{
-		super("The wording is missing!");
+		super(MyResourceBundle.getBundle().getString("missingTypeOfPlantsWordingException"));
 	}
 }
