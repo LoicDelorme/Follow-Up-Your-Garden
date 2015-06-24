@@ -3,10 +3,12 @@ package fr.loicdelorme.followUpYourGarden.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.DatePicker;
@@ -14,12 +16,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import fr.loicdelorme.followUpYourGarden.core.models.Case;
 import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
+import fr.loicdelorme.followUpYourGarden.core.models.Position;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.services.GroupOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfPlantsServices;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidGroupOfPlantsBlueLevelException;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidGroupOfPlantsGreenLevelException;
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.InvalidGroupOfPlantsIdException;
@@ -117,6 +125,12 @@ public class GroupOfPlantsFormController extends Controller
 	private ListView<TypeOfPlants> typesOfPlants;
 
 	/**
+	 * The positions.
+	 */
+	@FXML
+	private GridPane positions;
+
+	/**
 	 * The valid button.
 	 */
 	@FXML
@@ -144,29 +158,40 @@ public class GroupOfPlantsFormController extends Controller
 	private GroupOfPlantsServices groupOfPlantsServices;
 
 	/**
-	 * The type of plants services.
+	 * The final positions.
 	 */
-	private TypeOfPlantsServices typeOfPlantsServices;
+	private List<Position> finalPositions;
+
+	/**
+	 * The icon color to set.
+	 */
+	private Color iconColorToSet;
 
 	/**
 	 * Initialize data.
 	 * 
 	 * @param groupOfPlants
 	 *            The group of plants.
+	 * @param typesOfPlants
+	 *            The list of types of plants.
+	 * @param cases
+	 *            The list of cases.
+	 * @param width
+	 *            The width.
+	 * @param height
+	 *            The height.
 	 * @param groupOfPlantsServices
 	 *            The group of plants services.
-	 * @param typeOfPlantsServices
-	 *            The type of plants services.
 	 * @param stage
 	 *            The stage.
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public void initializeData(GroupOfPlants groupOfPlants, GroupOfPlantsServices groupOfPlantsServices, TypeOfPlantsServices typeOfPlantsServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(GroupOfPlants groupOfPlants, List<TypeOfPlants> typesOfPlants, List<Case> cases, int width, int height, GroupOfPlantsServices groupOfPlantsServices, Stage stage, ResourceBundle bundle)
 	{
 		this.groupOfPlants = groupOfPlants;
 		this.groupOfPlantsServices = groupOfPlantsServices;
-		this.typeOfPlantsServices = typeOfPlantsServices;
+		this.finalPositions = new ArrayList<Position>();
 		this.stage = stage;
 		this.bundle = bundle;
 
@@ -175,6 +200,7 @@ public class GroupOfPlantsFormController extends Controller
 			this.title.setText(this.bundle.getString("groupOfPlantsAdditionFormTitle"));
 			this.wording.setPromptText(this.bundle.getString("groupOfPlantsWordingPromptText"));
 			this.typesOfPlantsLabel.setText(this.bundle.getString("groupOfPlantsTypesOfPlantsAdditionLabel"));
+			this.iconColorToSet = Color.GREEN;
 			this.isUpdateForm = false;
 		}
 		else
@@ -185,6 +211,8 @@ public class GroupOfPlantsFormController extends Controller
 			this.imagePath.setText(this.groupOfPlants.getPath());
 			this.iconColor.setValue(this.groupOfPlants.getIconColor());
 			this.typesOfPlantsLabel.setText(this.bundle.getString("groupOfPlantsTypesOfPlantsModificationLabel"));
+			this.finalPositions.addAll(this.groupOfPlants.getPositions());
+			this.iconColorToSet = this.groupOfPlants.getIconColor();
 			this.isUpdateForm = true;
 		}
 
@@ -196,37 +224,44 @@ public class GroupOfPlantsFormController extends Controller
 		this.valid.setText(this.bundle.getString("groupOfPlantsValidButton"));
 		this.cancel.setText(this.bundle.getString("groupOfPlantsCancelButton"));
 
-		initializeTypesOfPlants();
-		this.typesOfPlants.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-		this.stage.setResizable(false);
-	}
-
-	/**
-	 * Initialize types of plants.
-	 */
-	private void initializeTypesOfPlants()
-	{
-		List<TypeOfPlants> typesOfPlants = null;
-
-		if (this.groupOfPlants == null)
-		{
-			try
-			{
-				typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
-			}
-			catch (ClassNotFoundException | IOException | SQLException e)
-			{
-				this.processException(e);
-			}
-		}
-		else
-		{
-			typesOfPlants = this.groupOfPlants.getTypesOfPlants();
-		}
-
 		this.typesOfPlants.getItems().clear();
 		this.typesOfPlants.getItems().addAll(typesOfPlants);
+		this.typesOfPlants.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+		int index = 0;
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				Case case_ = cases.get(index);
+				case_.setBackground(new Background(new BackgroundFill(case_.getIconColor(), CornerRadii.EMPTY, Insets.EMPTY)));
+				case_.setPrefSize(25, 25);
+
+				if (!case_.getIsDisabled())
+				{
+					case_.setOnAction(e ->
+					{
+						if (case_.getIsActivated())
+						{
+							this.finalPositions.remove(case_.getPosition());
+							case_.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+						}
+						else
+						{
+							this.finalPositions.add(case_.getPosition());
+							case_.setBackground(new Background(new BackgroundFill(this.iconColorToSet, CornerRadii.EMPTY, Insets.EMPTY)));
+						}
+
+						case_.setIsActivated(!case_.getIsActivated());
+					});
+				}
+
+				this.positions.add(case_, y, x);
+				index++;
+			}
+		}
+
+		this.stage.setResizable(false);
 	}
 
 	/**
@@ -255,13 +290,13 @@ public class GroupOfPlantsFormController extends Controller
 		{
 			if (this.isUpdateForm)
 			{
-				this.groupOfPlantsServices.updateGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), null, this.groupOfPlants);
+				this.groupOfPlantsServices.updateGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), this.finalPositions, this.groupOfPlants);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("groupOfPlantsModificationSuccess"));
 				this.stage.close();
 			}
 			else
 			{
-				this.groupOfPlantsServices.addGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), null);
+				this.groupOfPlantsServices.addGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), this.typesOfPlants.getItems(), this.finalPositions);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("groupOfPlantsAdditionSuccess"));
 				this.stage.close();
 			}
