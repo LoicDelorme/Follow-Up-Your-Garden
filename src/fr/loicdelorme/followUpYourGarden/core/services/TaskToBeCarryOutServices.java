@@ -142,6 +142,35 @@ public class TaskToBeCarryOutServices
 	}
 
 	/**
+	 * Get all tasks to be carry out for a specific group of plants.
+	 * 
+	 * @param idGroupOfPlants
+	 *            The id of group of plants.
+	 * 
+	 * @return A list of tasks to be carry out.
+	 * @throws SQLException
+	 *             If an SQL exception is thrown.
+	 * @throws ClassNotFoundException
+	 *             If the class is not found.
+	 * @throws FileNotFoundException
+	 *             If the file is not found.
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 */
+	public List<TaskToBeCarryOut> getTasksToBeCarryOut(int idGroupOfPlants) throws ClassNotFoundException, FileNotFoundException, IOException, SQLException
+	{
+		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
+		sourceManipulator.openConnection();
+
+		this.taskToBeCarryOutManipulator.setConnection(sourceManipulator.getConnection());
+		List<TaskToBeCarryOut> tasksToBeCarryOut = this.taskToBeCarryOutManipulator.getTasksToBeCarryOut(idGroupOfPlants, this.groupOfPlantsManipulator, this.typeOfTasksManipulator, this.positionManipulator, this.typeOfPlantsManipulator);
+
+		sourceManipulator.closeConnection();
+
+		return tasksToBeCarryOut;
+	}
+
+	/**
 	 * Add a task to be carry out.
 	 * 
 	 * @param groupOfPlants
