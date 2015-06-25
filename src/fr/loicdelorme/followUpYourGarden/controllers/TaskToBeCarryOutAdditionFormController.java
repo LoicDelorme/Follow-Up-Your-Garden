@@ -29,7 +29,7 @@ import fr.loicdelorme.followUpYourGarden.core.services.exceptions.MissingTaskToB
 import fr.loicdelorme.followUpYourGarden.core.services.exceptions.MissingTaskToBeCarryOutTypeOfTasksException;
 
 /**
- * This class allow you to control the task to be carry out form.
+ * This class allow you to control the task to be carry out addition form.
  * 
  * @author DELORME Loïc
  * @version 1.0.0
