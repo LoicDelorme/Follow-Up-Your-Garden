@@ -1,4 +1,4 @@
-package fr.loicdelorme.followUpYourGarden.controllers;
+package fr.loicdelorme.followUpYourGarden.core.services;
 
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ICarriedOutTaskManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator;
@@ -12,12 +12,6 @@ import fr.loicdelorme.followUpYourGarden.core.manipulators.models.database.Posit
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.database.TaskToBeCarryOutDatabaseManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.database.TypeOfPlantsDatabaseManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.database.TypeOfTasksDatabaseManipulator;
-import fr.loicdelorme.followUpYourGarden.core.services.CarriedOutTaskServices;
-import fr.loicdelorme.followUpYourGarden.core.services.GroupOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.PositionServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TaskToBeCarryOutServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfTasksServices;
 
 /**
  * This class allow you to handle services.
