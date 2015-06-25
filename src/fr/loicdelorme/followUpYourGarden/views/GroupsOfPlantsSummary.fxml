@@ -45,12 +45,6 @@
       </MenuBar>
       <HBox spacing="15.0">
          <children>
-            <Button fx:id="addTaskToBeCarryOut" mnemonicParsing="false" onAction="#onAddTaskToBeCarryOutAction" />
-            <Button fx:id="addGroupOfPlants" mnemonicParsing="false" onAction="#onAddGroupOfPlantsAction" />
-            <Button fx:id="updateGroupOfPlants" mnemonicParsing="false" onAction="#onUpdateGroupOfPlantsAction" />
-            <Button fx:id="removeGroupOfPlants" mnemonicParsing="false" onAction="#onRemoveGroupOfPlantsAction" />
-            <Button fx:id="groupOfPlantsHistoric" mnemonicParsing="false" onAction="#onGroupOfPlantsHistoricAction" />
-            <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="taskToBeCarryOutSchedule" mnemonicParsing="false" onAction="#onTaskToBeCarryOutScheduleAction" />
             <Button fx:id="globalRepresentation" mnemonicParsing="false" onAction="#onGlobalRepresentationAction" />
          </children>
@@ -58,12 +52,24 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </HBox>
+      <HBox spacing="15.0">
+         <children>
+            <Button fx:id="addTaskToBeCarryOut" mnemonicParsing="false" onAction="#onAddTaskToBeCarryOutAction" />
+            <Button fx:id="addGroupOfPlants" mnemonicParsing="false" onAction="#onAddGroupOfPlantsAction" />
+            <Button fx:id="updateGroupOfPlants" mnemonicParsing="false" onAction="#onUpdateGroupOfPlantsAction" />
+            <Button fx:id="removeGroupOfPlants" mnemonicParsing="false" onAction="#onRemoveGroupOfPlantsAction" />
+            <Button fx:id="groupOfPlantsHistoric" mnemonicParsing="false" onAction="#onGroupOfPlantsHistoricAction" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" />
+         </padding>
+      </HBox>
       <HBox alignment="CENTER">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" />
          </padding>
          <children>
-            <TreeView fx:id="groupsOfPlants" prefHeight="400.0" prefWidth="1170.0" />
+            <TreeView fx:id="groupsOfPlants" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
