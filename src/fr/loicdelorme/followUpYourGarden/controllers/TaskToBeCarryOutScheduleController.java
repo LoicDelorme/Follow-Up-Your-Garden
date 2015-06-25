@@ -537,12 +537,12 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	{
 		TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
 
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutForm.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutUpdatingForm.fxml"));
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(loader.load()));
 
-		TaskToBeCarryOutFormController controller = loader.getController();
+		TaskToBeCarryOutUpdatingFormController controller = loader.getController();
 		controller.initializeData(selectedTaskToBeCarryOut, this.taskToBeCarryOutServices, stage, this.bundle);
 
 		stage.showAndWait();
