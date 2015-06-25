@@ -19,9 +19,11 @@ import javafx.stage.Stage;
 import fr.loicdelorme.followUpYourGarden.core.helpers.CarriedOutTasksHelper;
 import fr.loicdelorme.followUpYourGarden.core.helpers.CasesHelper;
 import fr.loicdelorme.followUpYourGarden.core.helpers.TextComputerHelper;
+import fr.loicdelorme.followUpYourGarden.core.helpers.TypesOfTasksHelper;
 import fr.loicdelorme.followUpYourGarden.core.models.CarriedOutTask;
 import fr.loicdelorme.followUpYourGarden.core.models.ContentSelectorType;
 import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
+import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
 import fr.loicdelorme.followUpYourGarden.core.services.CarriedOutTaskServices;
@@ -530,18 +532,19 @@ public class GroupOfPlantsSummaryController extends Controller
 		boolean isCorrectInstance = (selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false);
 		if (selectedItem != null && isCorrectInstance)
 		{
-			List<TypeOfTasks> typesOfTasks = null;
+			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
+			List<TypeOfTasks> typesOfTasks = null;
+			List<TaskToBeCarryOut> tasksToBeCarryOut = null;
 			try
 			{
 				typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
+				tasksToBeCarryOut = this.taskToBeCarryOutServices.getTasksToBeCarryOut(selectedGroupOfPlants.getId());
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
 			{
 				this.processException(e);
 			}
-
-			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutAdditionForm.fxml"));
 
@@ -549,11 +552,9 @@ public class GroupOfPlantsSummaryController extends Controller
 			stage.setScene(new Scene(loader.load()));
 
 			TaskToBeCarryOutAdditionFormController controller = loader.getController();
-			controller.initializeData(selectedGroupOfPlants, typesOfTasks, this.taskToBeCarryOutServices, stage, this.bundle);
+			controller.initializeData(selectedGroupOfPlants, TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut), this.taskToBeCarryOutServices, stage, this.bundle);
 
 			stage.showAndWait();
-
-			updateGroupsOfPlants();
 		}
 		else
 		{
@@ -590,6 +591,8 @@ public class GroupOfPlantsSummaryController extends Controller
 		controller.initializeData(null, typesOfPlants, CasesHelper.generateCasesForAddingGroupOfPlants(this.width, this.height, allGroupsOfPlants), this.width, this.height, this.groupOfPlantsServices, stage, this.bundle);
 
 		stage.showAndWait();
+
+		updateGroupsOfPlants();
 	}
 
 	/**
