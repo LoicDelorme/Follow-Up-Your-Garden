@@ -513,18 +513,24 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	public void onValidateTaskToBeCarryOutAction()
 	{
 		TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
-
-		try
+		if (selectedTaskToBeCarryOut != null)
 		{
-			this.taskToBeCarryOutServices.validateTaskToBeCarryOut(selectedTaskToBeCarryOut);
-			this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutValidateSuccess"));
-		}
-		catch (ClassNotFoundException | SQLException | IOException e)
-		{
-			this.processException(e);
-		}
+			try
+			{
+				this.taskToBeCarryOutServices.validateTaskToBeCarryOut(selectedTaskToBeCarryOut);
+				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutValidateSuccess"));
+			}
+			catch (ClassNotFoundException | SQLException | IOException e)
+			{
+				this.processException(e);
+			}
 
-		updateSchedule();
+			updateSchedule();
+		}
+		else
+		{
+			this.displayError(this.bundle.getString("invalidSelectionTitle"), this.bundle.getString("invalidTaskToBeCarryOutScheduleSelectionContent"));
+		}
 	}
 
 	/**
@@ -536,18 +542,24 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	public void onUpdateTaskToBeCarryOutAction() throws IOException
 	{
 		TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
+		if (selectedTaskToBeCarryOut != null)
+		{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutUpdatingForm.fxml"));
 
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutUpdatingForm.fxml"));
+			Stage stage = new Stage();
+			stage.setScene(new Scene(loader.load()));
 
-		Stage stage = new Stage();
-		stage.setScene(new Scene(loader.load()));
+			TaskToBeCarryOutUpdatingFormController controller = loader.getController();
+			controller.initializeData(selectedTaskToBeCarryOut, this.taskToBeCarryOutServices, stage, this.bundle);
 
-		TaskToBeCarryOutUpdatingFormController controller = loader.getController();
-		controller.initializeData(selectedTaskToBeCarryOut, this.taskToBeCarryOutServices, stage, this.bundle);
+			stage.showAndWait();
 
-		stage.showAndWait();
-
-		updateSchedule();
+			updateSchedule();
+		}
+		else
+		{
+			this.displayError(this.bundle.getString("invalidSelectionTitle"), this.bundle.getString("invalidTaskToBeCarryOutScheduleSelectionContent"));
+		}
 	}
 
 	/**
@@ -555,20 +567,27 @@ public class TaskToBeCarryOutScheduleController extends Controller
 	 */
 	public void onRemoveTaskToBeCarryOutAction()
 	{
-		if (this.displayConfirmationDialog(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalQuestion")))
+		TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
+		if (selectedTaskToBeCarryOut != null)
 		{
-			TaskToBeCarryOut selectedTaskToBeCarryOut = this.schedule.getSelectionModel().getSelectedItem();
-
-			try
+			if (this.displayConfirmationDialog(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalQuestion")))
 			{
-				this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
-			}
-			catch (ClassNotFoundException | SQLException | IOException e)
-			{
-				this.processException(e);
-			}
+				try
+				{
+					this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
+				}
+				catch (ClassNotFoundException | SQLException | IOException e)
+				{
+					this.processException(e);
+				}
 
-			updateSchedule();
+				updateSchedule();
+
+			}
+		}
+		else
+		{
+			this.displayError(this.bundle.getString("invalidSelectionTitle"), this.bundle.getString("invalidTaskToBeCarryOutScheduleSelectionContent"));
 		}
 	}
 
