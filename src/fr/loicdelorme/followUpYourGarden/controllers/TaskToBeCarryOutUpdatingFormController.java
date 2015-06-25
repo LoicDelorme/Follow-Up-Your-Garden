@@ -180,20 +180,29 @@ public class TaskToBeCarryOutUpdatingFormController extends Controller
 		this.stage = stage;
 		this.bundle = bundle;
 
-		this.title.setText(this.bundle.getString("taskToBeCarryOutAdditionFormTitle"));
+		this.title.setText(this.bundle.getString("taskToBeCarryOutModificationFormTitle"));
 		this.deadlineDateLabel.setText(this.bundle.getString("taskToBeCarryOutDeadlineDateLabel"));
 		this.anticipatedDurationLabel.setText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationLabel"));
 		this.anticipatedDuration.setPromptText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationPromptText"));
 		this.anticipatedDurationLabelBis.setText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationLabelBis"));
 		this.priorityLabel.setText(this.bundle.getString("taskToBeCarryOutPriorityLabel"));
 		this.isRecurrentLabel.setText(this.bundle.getString("taskToBeCarryOutIsRecurrentLabel"));
-		this.anticipatedDurationLabel.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabel"));
-		this.anticipatedDuration.setPromptText(this.bundle.getString("taskToBeCarryOutPeriodicityPromptText"));
-		this.anticipatedDurationLabelBis.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabelBis"));
+		this.periodicityLabel.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabel"));
+		this.periodicity.setPromptText(this.bundle.getString("taskToBeCarryOutPeriodicityPromptText"));
+		this.periodicityLabelBis.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabelBis"));
 		this.descriptionLabel.setText(this.bundle.getString("taskToBeCarryOutDescriptionLabel"));
 		this.currentProgressionLabel.setText(this.bundle.getString("taskToBeCarryOutCurrentProgressionLabel"));
 		this.valid.setText(this.bundle.getString("taskToBeCarryOutValidButton"));
 		this.cancel.setText(this.bundle.getString("taskToBeCarryOutCancelButton"));
+
+		this.deadlineDate.setValue(this.taskToBeCarryOut.getDeadlineDate());
+		this.anticipatedDuration.setText(String.valueOf(this.taskToBeCarryOut.getAnticipatedDuration()));
+		this.priority.getItems().addAll(Priority.values());
+		this.priority.setValue(this.taskToBeCarryOut.getPriority());
+		this.isRecurrent.setSelected(this.taskToBeCarryOut.getIsRecurrent());
+		this.periodicity.setText(String.valueOf(this.taskToBeCarryOut.getPeriodicity()));
+		this.description.setText(this.taskToBeCarryOut.getDescription());
+		this.currentProgression.setValue(this.taskToBeCarryOut.getCurrentProgression());
 
 		this.stage.setResizable(false);
 	}
