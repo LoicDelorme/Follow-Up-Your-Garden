@@ -50,11 +50,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="10.0">
          <children>
-            <Label fx:id="priorityLabel" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
+            <Label fx:id="priorityLabel" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
             <ChoiceBox fx:id="priority" />
          </children>
          <padding>
