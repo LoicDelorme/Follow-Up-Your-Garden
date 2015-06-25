@@ -81,11 +81,7 @@ public class TypeOfTasks implements Comparable<TypeOfTasks>
 	@Override
 	public String toString()
 	{
-		StringBuilder representation = new StringBuilder();
-
-		representation.append("{id : ").append(this.id).append(", wording : ").append(this.wording).append(", description : ").append("".equals(this.description) ? "NULL" : this.description).append("}");
-
-		return representation.toString();
+		return this.wording;
 	}
 
 	/**
