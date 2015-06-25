@@ -63,11 +63,7 @@ public class TypeOfPlants implements Comparable<TypeOfPlants>
 	@Override
 	public String toString()
 	{
-		StringBuilder representation = new StringBuilder();
-
-		representation.append("{id : ").append(this.id).append(", wording : ").append(this.wording).append("}");
-
-		return representation.toString();
+		return this.wording;
 	}
 
 	/**
