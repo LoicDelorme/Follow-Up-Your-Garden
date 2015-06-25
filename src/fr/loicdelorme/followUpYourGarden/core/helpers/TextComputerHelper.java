@@ -2,6 +2,7 @@ package fr.loicdelorme.followUpYourGarden.core.helpers;
 
 import java.util.List;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
 import fr.loicdelorme.followUpYourGarden.core.models.CarriedOutTask;
 
 /**
@@ -21,6 +22,11 @@ public class TextComputerHelper
 	 */
 	public static String computeCarriedOutTasksText(List<CarriedOutTask> carriedOutTasks)
 	{
+		if (carriedOutTasks.size() == 0)
+		{
+			return MyResourceBundle.getBundle().getString("groupOfPlantsSummaryComplementaryInformationNoHistoric");
+		}
+
 		StringBuilder result = new StringBuilder();
 
 		for (CarriedOutTask currentCarriedOutTask : carriedOutTasks)
