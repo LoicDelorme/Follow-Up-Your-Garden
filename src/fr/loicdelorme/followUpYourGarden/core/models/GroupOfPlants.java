@@ -161,11 +161,7 @@ public class GroupOfPlants implements Comparable<GroupOfPlants>
 	@Override
 	public String toString()
 	{
-		StringBuilder representation = new StringBuilder();
-
-		representation.append("{id : ").append(this.id).append(", wording : ").append(this.wording).append(", plantingDate : ").append(this.plantingDate).append(", path : ").append(this.path).append(", iconColor : ").append(this.iconColor).append(", typesOfPlants : ").append(this.typesOfPlants).append(", positions : ").append(this.positions).append("}");
-
-		return representation.toString();
+		return this.wording;
 	}
 
 	/**
