@@ -55,6 +55,11 @@ public class TaskToBeCarryOutServices
 	private static final int MINIMAL_ANTICIPATED_DURATION_VALUE = 0;
 
 	/**
+	 * The initial description.
+	 */
+	private static final String INITIAL_DESCRIPTION = "";
+
+	/**
 	 * A task to be carry out manipulator.
 	 */
 	private ITaskToBeCarryOutManipulator taskToBeCarryOutManipulator;
@@ -147,10 +152,6 @@ public class TaskToBeCarryOutServices
 	 *            The deadline date.
 	 * @param priority
 	 *            The priority.
-	 * @param description
-	 *            The description.
-	 * @param currentProgression
-	 *            The current progression.
 	 * @param anticipatedDuration
 	 *            The anticipated duration.
 	 * @param isRecurrent
@@ -188,15 +189,15 @@ public class TaskToBeCarryOutServices
 	 * @throws SQLException
 	 *             If an SQL exception is thrown.
 	 */
-	public void addTaskToBeCarryOut(GroupOfPlants groupOfPlants, TypeOfTasks typeOfTasks, LocalDate deadlineDate, Priority priority, String description, Integer currentProgression, Double anticipatedDuration, Boolean isRecurrent, Integer periodicity) throws MissingTaskToBeCarryOutGroupOfPlantsException, MissingTaskToBeCarryOutTypeOfTasksException, MissingTaskToBeCarryOutDeadlineDateException, MissingTaskToBeCarryOutPriorityException, MissingTaskToBeCarryOutDescriptionException, MissingTaskToBeCarryOutCurrentProgressionException, MissingTaskToBeCarryOutAnticipatedDurationException, MissingTaskToBeCarryOutIsRecurrentException, MissingTaskToBeCarryOutPeriodicityException, InvalidTaskToBeCarryOutCurrentProgressionException, InvalidTaskToBeCarryOutAnticipatedDurationException, ClassNotFoundException, FileNotFoundException, IOException, SQLException
+	public void addTaskToBeCarryOut(GroupOfPlants groupOfPlants, TypeOfTasks typeOfTasks, LocalDate deadlineDate, Priority priority, Double anticipatedDuration, Boolean isRecurrent, Integer periodicity) throws MissingTaskToBeCarryOutGroupOfPlantsException, MissingTaskToBeCarryOutTypeOfTasksException, MissingTaskToBeCarryOutDeadlineDateException, MissingTaskToBeCarryOutPriorityException, MissingTaskToBeCarryOutDescriptionException, MissingTaskToBeCarryOutCurrentProgressionException, MissingTaskToBeCarryOutAnticipatedDurationException, MissingTaskToBeCarryOutIsRecurrentException, MissingTaskToBeCarryOutPeriodicityException, InvalidTaskToBeCarryOutCurrentProgressionException, InvalidTaskToBeCarryOutAnticipatedDurationException, ClassNotFoundException, FileNotFoundException, IOException, SQLException
 	{
-		checkTaskToBeCarryOutParameters(groupOfPlants, typeOfTasks, deadlineDate, priority, description, currentProgression, anticipatedDuration, isRecurrent, periodicity);
+		checkTaskToBeCarryOutParameters(groupOfPlants, typeOfTasks, deadlineDate, priority, INITIAL_DESCRIPTION, MINIMAL_CURRENT_PROGRESSION_VALUE, anticipatedDuration, isRecurrent, periodicity);
 
 		ISourceManipulator sourceManipulator = MyDatabase.getInstance();
 		sourceManipulator.openConnection();
 
 		this.taskToBeCarryOutManipulator.setConnection(sourceManipulator.getConnection());
-		this.taskToBeCarryOutManipulator.addTaskToBeCarryOut(new TaskToBeCarryOut(groupOfPlants, typeOfTasks, deadlineDate, priority, description, currentProgression, anticipatedDuration, isRecurrent, periodicity));
+		this.taskToBeCarryOutManipulator.addTaskToBeCarryOut(new TaskToBeCarryOut(groupOfPlants, typeOfTasks, deadlineDate, priority, INITIAL_DESCRIPTION, MINIMAL_CURRENT_PROGRESSION_VALUE, anticipatedDuration, isRecurrent, periodicity));
 
 		sourceManipulator.closeConnection();
 	}
