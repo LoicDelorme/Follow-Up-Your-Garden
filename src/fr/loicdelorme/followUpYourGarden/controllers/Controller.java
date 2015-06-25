@@ -144,22 +144,24 @@ public class Controller
 	 */
 	protected void processException(Exception exception)
 	{
+		this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
+
 		if (exception instanceof ClassNotFoundException)
 		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
 			this.displayError(this.bundle.getString("driverErrorTitle"), this.bundle.getString("driverErrorHeader"), exception.getMessage());
+			return;
 		}
 
 		if (exception instanceof SQLException)
 		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
 			this.displayError(this.bundle.getString("sqlErrorTitle"), this.bundle.getString("sqlErrorHeader"), exception.getMessage());
+			return;
 		}
 
 		if (exception instanceof IOException)
 		{
-			this.saveError(this.bundle.getString("errorFilePath"), this.bundle.getString("errorFileExtension"), exception);
 			this.displayError(this.bundle.getString("ioErrorTitle"), this.bundle.getString("ioErrorHeader"), exception.getMessage());
+			return;
 		}
 	}
 }
