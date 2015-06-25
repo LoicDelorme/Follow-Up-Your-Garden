@@ -47,7 +47,7 @@
                      <children>
                         <Label fx:id="imageLabel" />
                         <Button fx:id="image" mnemonicParsing="false" onAction="#onImageAction" />
-                        <Label fx:id="imagePath" prefWidth="200.0" />
+                        <Label fx:id="imagePath" prefWidth="175.0" />
                      </children>
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" />
