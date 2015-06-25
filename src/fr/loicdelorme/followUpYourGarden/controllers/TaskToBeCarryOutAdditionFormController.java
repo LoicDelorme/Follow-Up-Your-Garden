@@ -2,6 +2,7 @@ package fr.loicdelorme.followUpYourGarden.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -46,13 +47,13 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 	 * The type of tasks label.
 	 */
 	@FXML
-	private Label typeOfTasksLabel;
+	private Label typesOfTasksLabel;
 
 	/**
-	 * The type of tasks.
+	 * The types of tasks.
 	 */
 	@FXML
-	private ChoiceBox<TypeOfTasks> typeOfTasks;
+	private ChoiceBox<TypeOfTasks> typesOfTasks;
 
 	/**
 	 * The deadline date label.
@@ -153,6 +154,8 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 	 * 
 	 * @param groupOfPlants
 	 *            The group of plants.
+	 * @param typesOfTasks
+	 *            The types of tasks.
 	 * @param taskToBeCarryOutServices
 	 *            The task to be carry out services.
 	 * @param stage
@@ -160,7 +163,7 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public void initializeData(GroupOfPlants groupOfPlants, TaskToBeCarryOutServices taskToBeCarryOutServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(GroupOfPlants groupOfPlants, List<TypeOfTasks> typesOfTasks, TaskToBeCarryOutServices taskToBeCarryOutServices, Stage stage, ResourceBundle bundle)
 	{
 		this.groupOfPlants = groupOfPlants;
 		this.taskToBeCarryOutServices = taskToBeCarryOutServices;
@@ -168,20 +171,24 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 		this.bundle = bundle;
 
 		this.title.setText(this.bundle.getString("taskToBeCarryOutAdditionFormTitle"));
-		this.typeOfTasksLabel.setText(this.bundle.getString("taskToBeCarryOutTypeOfTasksLabel"));
+		this.typesOfTasksLabel.setText(this.bundle.getString("taskToBeCarryOutTypeOfTasksLabel"));
 		this.deadlineDateLabel.setText(this.bundle.getString("taskToBeCarryOutDeadlineDateLabel"));
 		this.anticipatedDurationLabel.setText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationLabel"));
 		this.anticipatedDuration.setPromptText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationPromptText"));
 		this.anticipatedDurationLabelBis.setText(this.bundle.getString("taskToBeCarryOutAnticipatedDurationLabelBis"));
 		this.priorityLabel.setText(this.bundle.getString("taskToBeCarryOutPriorityLabel"));
 		this.isRecurrentLabel.setText(this.bundle.getString("taskToBeCarryOutIsRecurrentLabel"));
-		this.anticipatedDurationLabel.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabel"));
-		this.anticipatedDuration.setPromptText(this.bundle.getString("taskToBeCarryOutPeriodicityPromptText"));
-		this.anticipatedDurationLabelBis.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabelBis"));
+		this.periodicityLabel.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabel"));
+		this.periodicity.setPromptText(this.bundle.getString("taskToBeCarryOutPeriodicityPromptText"));
+		this.periodicityLabelBis.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabelBis"));
 		this.valid.setText(this.bundle.getString("taskToBeCarryOutValidButton"));
 		this.cancel.setText(this.bundle.getString("taskToBeCarryOutCancelButton"));
-		
+
+		this.typesOfTasks.getItems().addAll(typesOfTasks);
+		this.typesOfTasks.setValue(typesOfTasks.get(0));
+
 		this.priority.getItems().addAll(Priority.values());
+		this.priority.setValue(Priority.values()[0]);
 
 		this.stage.setResizable(false);
 	}
@@ -193,7 +200,7 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 	{
 		try
 		{
-			this.taskToBeCarryOutServices.addTaskToBeCarryOut(this.groupOfPlants, this.typeOfTasks.getValue(), this.deadlineDate.getValue(), this.priority.getValue(), Double.parseDouble(this.anticipatedDuration.getText()), this.isRecurrent.isSelected(), Integer.parseInt(this.periodicity.getText()));
+			this.taskToBeCarryOutServices.addTaskToBeCarryOut(this.groupOfPlants, this.typesOfTasks.getValue(), this.deadlineDate.getValue(), this.priority.getValue(), Double.parseDouble(this.anticipatedDuration.getText()), this.isRecurrent.isSelected(), Integer.parseInt(this.periodicity.getText()));
 			this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutAdditionSuccess"));
 			this.stage.close();
 		}
