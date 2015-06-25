@@ -91,10 +91,6 @@ public enum Priority
 	@Override
 	public String toString()
 	{
-		StringBuilder representation = new StringBuilder();
-
-		representation.append("{id : ").append(this.id).append(", wording : ").append(this.wording).append(", path : ").append(this.path).append("}");
-
-		return representation.toString();
+		return this.wording;
 	}
 }
