@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="500.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.loicdelorme.followUpYourGarden.controllers.GroupOfPlantsSummaryController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu fx:id="actions" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#onQuitAction" />
+            </items>
+          </Menu>
+          <Menu fx:id="typeOfPlants" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="addTypeOfPlants" mnemonicParsing="false" onAction="#onAddTypeOfPlantsAction" />
+                  <MenuItem fx:id="updateTypeOfPlants" mnemonicParsing="false" onAction="#onUpdateTypeOfPlantsAction" />
+                  <MenuItem fx:id="removeTypeOfPlants" mnemonicParsing="false" onAction="#onRemoveTypeOfPlantsAction" />
+            </items>
+          </Menu>
+          <Menu fx:id="typeOfTasks" mnemonicParsing="false">
+            <items>
+              <MenuItem fx:id="addTypeOfTasks" mnemonicParsing="false" onAction="#onAddTypeOfTasksAction" />
+                  <MenuItem fx:id="updateTypeOfTasks" mnemonicParsing="false" onAction="#onUpdateTypeOfTasksAction" />
+                  <MenuItem fx:id="removeTypeOfTasks" mnemonicParsing="false" onAction="#onRemoveTypeOfTasksAction" />
+            </items>
+          </Menu>
+            <Menu fx:id="help" mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="documentation" mnemonicParsing="false" onAction="#onDocumentationAction" />
+                  <MenuItem fx:id="about" mnemonicParsing="false" onAction="#onAboutAction" />
+               </items>
+            </Menu>
+        </menus>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </MenuBar>
+      <HBox spacing="15.0">
+         <children>
+            <Button fx:id="addTaskToBeCarryOut" mnemonicParsing="false" onAction="#onAddTaskToBeCarryOutAction" />
+            <Button fx:id="addGroupOfPlants" mnemonicParsing="false" onAction="#onAddGroupOfPlantsAction" />
+            <Button fx:id="updateGroupOfPlants" mnemonicParsing="false" onAction="#onUpdateGroupOfPlantsAction" />
+            <Button fx:id="removeGroupOfPlants" mnemonicParsing="false" onAction="#onRemoveGroupOfPlantsAction" />
+            <Button fx:id="groupOfPlantsHistoric" mnemonicParsing="false" onAction="#onGroupOfPlantsHistoricAction" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="taskToBeCarryOutSchedule" mnemonicParsing="false" onAction="#onTaskToBeCarryOutScheduleAction" />
+            <Button fx:id="globalRepresentation" mnemonicParsing="false" onAction="#onGlobalRepresentationAction" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" />
+         </padding>
+         <children>
+            <TreeView fx:id="groupsOfPlants" prefHeight="400.0" prefWidth="1170.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
