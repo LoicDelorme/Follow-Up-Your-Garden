@@ -180,6 +180,8 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 		this.anticipatedDurationLabelBis.setText(this.bundle.getString("taskToBeCarryOutPeriodicityLabelBis"));
 		this.valid.setText(this.bundle.getString("taskToBeCarryOutValidButton"));
 		this.cancel.setText(this.bundle.getString("taskToBeCarryOutCancelButton"));
+		
+		this.priority.getItems().addAll(Priority.values());
 
 		this.stage.setResizable(false);
 	}
