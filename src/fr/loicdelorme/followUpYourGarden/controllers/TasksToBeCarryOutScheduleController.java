@@ -34,7 +34,7 @@ import fr.loicdelorme.followUpYourGarden.core.services.TypeOfTasksServices;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class TaskToBeCarryOutScheduleController extends Controller
+public class TasksToBeCarryOutScheduleController extends Controller
 {
 	/**
 	 * The actions menu.
