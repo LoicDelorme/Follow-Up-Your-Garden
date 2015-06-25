@@ -22,8 +22,8 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="10.0">
          <children>
-            <Label fx:id="typeOfTasksLabel" textAlignment="CENTER" />
-            <ChoiceBox fx:id="typeOfTasks" />
+            <Label fx:id="typesOfTasksLabel" textAlignment="CENTER" />
+            <ChoiceBox fx:id="typesOfTasks" />
          </children>
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
