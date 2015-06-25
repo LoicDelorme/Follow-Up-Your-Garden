@@ -575,14 +575,13 @@ public class TasksToBeCarryOutScheduleController extends Controller
 				try
 				{
 					this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
+					this.displayInformation(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalSuccess"));
+					updateSchedule();
 				}
 				catch (ClassNotFoundException | SQLException | IOException e)
 				{
 					this.processException(e);
 				}
-
-				updateSchedule();
-
 			}
 		}
 		else
