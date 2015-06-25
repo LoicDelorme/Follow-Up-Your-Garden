@@ -192,7 +192,7 @@ public class TaskToBeCarryOutAdditionFormController extends Controller
 		try
 		{
 			this.taskToBeCarryOutServices.addTaskToBeCarryOut(this.groupOfPlants, this.typeOfTasks.getValue(), this.deadlineDate.getValue(), this.priority.getValue(), Double.parseDouble(this.anticipatedDuration.getText()), this.isRecurrent.isSelected(), Integer.parseInt(this.periodicity.getText()));
-			this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfPlantsAdditionSuccess"));
+			this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutAdditionSuccess"));
 			this.stage.close();
 		}
 		catch (MissingTaskToBeCarryOutGroupOfPlantsException | MissingTaskToBeCarryOutTypeOfTasksException | MissingTaskToBeCarryOutDeadlineDateException | MissingTaskToBeCarryOutPriorityException | MissingTaskToBeCarryOutDescriptionException | MissingTaskToBeCarryOutCurrentProgressionException | MissingTaskToBeCarryOutAnticipatedDurationException | MissingTaskToBeCarryOutIsRecurrentException | MissingTaskToBeCarryOutPeriodicityException | InvalidTaskToBeCarryOutCurrentProgressionException | InvalidTaskToBeCarryOutAnticipatedDurationException e)
