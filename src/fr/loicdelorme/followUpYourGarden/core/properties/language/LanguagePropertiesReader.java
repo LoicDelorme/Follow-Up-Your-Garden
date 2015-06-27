@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import fr.loicdelorme.followUpYourGarden.core.properties.ILanguageReader;
-import fr.loicdelorme.followUpYourGarden.core.properties.IPropertiesConstants;
+import fr.loicdelorme.followUpYourGarden.core.properties.IConstants;
 
 /**
  * This class allow you to read language configuration data into a properties file.
@@ -37,7 +37,7 @@ public class LanguagePropertiesReader implements ILanguageReader
 	public LanguagePropertiesReader() throws FileNotFoundException, IOException
 	{
 		this.properties = new Properties();
-		openPropertiesFile(IPropertiesConstants.LANGUAGE_CONFIGURATION_FILE);
+		openPropertiesFile(IConstants.LANGUAGE_CONFIGURATION_FILE);
 	}
 
 	/**
