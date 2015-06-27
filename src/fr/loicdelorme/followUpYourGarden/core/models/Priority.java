@@ -1,5 +1,7 @@
 package fr.loicdelorme.followUpYourGarden.core.models;
 
+import fr.loicdelorme.followUpYourGarden.core.language.MyResourceBundle;
+
 /**
  * This enumeration allow you to handle several priorities.
  * 
@@ -11,17 +13,17 @@ public enum Priority
 	/**
 	 * The priority is high.
 	 */
-	HIGH(1, "high", "fr/loicdelorme/followUpYourGarden/views/images/priorities/high.png"),
+	HIGH(1, MyResourceBundle.getBundle().getString("highPriority"), "fr/loicdelorme/followUpYourGarden/views/images/priorities/high.png"),
 
 	/**
 	 * The priority is medium.
 	 */
-	MEDIUM(2, "medium", "fr/loicdelorme/followUpYourGarden/views/images/priorities/medium.png"),
+	MEDIUM(2, MyResourceBundle.getBundle().getString("mediumPriority"), "fr/loicdelorme/followUpYourGarden/views/images/priorities/medium.png"),
 
 	/**
 	 * The priority is low.
 	 */
-	LOW(3, "low", "fr/loicdelorme/followUpYourGarden/views/images/priorities/low.png");
+	LOW(3, MyResourceBundle.getBundle().getString("lowPriority"), "fr/loicdelorme/followUpYourGarden/views/images/priorities/low.png");
 
 	/**
 	 * The id.
