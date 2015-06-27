@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="500.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.loicdelorme.followUpYourGarden.controllers.GroupOfPlantsSummaryController">
+<VBox prefHeight="500.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.loicdelorme.followUpYourGarden.controllers.GroupsOfPlantsSummaryController">
    <children>
       <MenuBar>
         <menus>
