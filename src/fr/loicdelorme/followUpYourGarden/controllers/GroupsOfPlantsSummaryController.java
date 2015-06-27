@@ -506,8 +506,9 @@ public class GroupsOfPlantsSummaryController extends Controller
 			}
 
 			List<TypeOfTasks> availableTypesOfTasks = TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut);
-			
-			if (availableTypesOfTasks.isEmpty()) {
+
+			if (availableTypesOfTasks.isEmpty())
+			{
 				this.displayInformation(this.bundle.getString("groupOfPlantsSummaryNoTypeOfTasksAvailableTitle"), this.bundle.getString("groupOfPlantsSummaryNoTypeOfTasksAvailableContent"));
 				return;
 			}
@@ -716,15 +717,18 @@ public class GroupsOfPlantsSummaryController extends Controller
 		TreeItem<Object> groupOfPlantsTreeItem;
 		for (GroupOfPlants currentGroupOfPlants : groupsOfPlants)
 		{
-			groupOfPlantsTreeItem = new TreeItem<Object>(currentGroupOfPlants);
-
-			for (TypeOfPlants currentTypeOfPlants : currentGroupOfPlants.getTypesOfPlants())
+			if (!currentGroupOfPlants.getWording().equals("maison"))
 			{
-				groupOfPlantsTreeItem.getChildren().add(new TreeItem<Object>(currentTypeOfPlants));
-			}
+				groupOfPlantsTreeItem = new TreeItem<Object>(currentGroupOfPlants);
 
-			groupOfPlantsTreeItem.setExpanded(true);
-			this.root.getChildren().add(groupOfPlantsTreeItem);
+				for (TypeOfPlants currentTypeOfPlants : currentGroupOfPlants.getTypesOfPlants())
+				{
+					groupOfPlantsTreeItem.getChildren().add(new TreeItem<Object>(currentTypeOfPlants));
+				}
+
+				groupOfPlantsTreeItem.setExpanded(true);
+				this.root.getChildren().add(groupOfPlantsTreeItem);
+			}
 		}
 	}
 }
