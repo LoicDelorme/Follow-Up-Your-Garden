@@ -1,5 +1,12 @@
 package fr.loicdelorme.followUpYourGarden.core.models;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -8,7 +15,7 @@ import javafx.scene.paint.Color;
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class LegendItem
+public class LegendItem extends HBox
 {
 	/**
 	 * The wording.
@@ -32,6 +39,14 @@ public class LegendItem
 	{
 		this.wording = wording;
 		this.iconColor = iconColor;
+
+		Button button = new Button();
+		button.setBackground(new Background(new BackgroundFill(this.iconColor, CornerRadii.EMPTY, Insets.EMPTY)));
+
+		Label label = new Label(this.wording);
+
+		this.setSpacing(5);
+		this.getChildren().addAll(button, label);
 	}
 
 	/**
@@ -60,11 +75,7 @@ public class LegendItem
 	@Override
 	public String toString()
 	{
-		StringBuilder representation = new StringBuilder();
-
-		representation.append("{wording : ").append(this.wording).append(", iconColor : ").append(this.iconColor).append("}");
-
-		return representation.toString();
+		return this.wording;
 	}
 
 	/**
