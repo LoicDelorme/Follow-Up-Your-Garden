@@ -236,7 +236,20 @@ public class GlobalRepresentationController extends Controller
 
 		try
 		{
-			this.allGroupsOfPlants = this.followUpYourGardenServices.getGroupOfPlantsServices().getGroupsOfPlants();
+			List<GroupOfPlants> groupsOfPlants = this.followUpYourGardenServices.getGroupOfPlantsServices().getGroupsOfPlants();
+
+			this.allGroupsOfPlants = new ArrayList<GroupOfPlants>();
+			for (GroupOfPlants currentGroupOfPlants : groupsOfPlants)
+			{
+				if (!currentGroupOfPlants.getWording().equals("maison"))
+				{
+					this.allGroupsOfPlants.add(currentGroupOfPlants);
+				}
+				else
+				{
+					this.home = currentGroupOfPlants;
+				}
+			}
 		}
 		catch (ClassNotFoundException | IOException | SQLException e)
 		{
@@ -245,6 +258,7 @@ public class GlobalRepresentationController extends Controller
 
 		this.allLegendItems = LegendItemsHelper.generateLegend(this.allGroupsOfPlants);
 		this.groupsOfPlants.getItems().addAll(this.allGroupsOfPlants);
+		this.allGroupsOfPlants.add(this.home);
 
 		updateGlobalRepresentation(CasesHelper.generateGlobalRepresentationCases(this.width, this.height, this.allGroupsOfPlants), this.allLegendItems);
 
@@ -497,11 +511,6 @@ public class GlobalRepresentationController extends Controller
 		GroupOfPlants selectedItem = this.groupsOfPlants.getSelectionModel().getSelectedItem();
 		if (selectedItem != null)
 		{
-			if (this.home == null)
-			{
-				initializeHomeAttribute();
-			}
-
 			List<GroupOfPlants> groupsOfPlants = new ArrayList<GroupOfPlants>();
 			groupsOfPlants.add(this.home);
 			groupsOfPlants.add(selectedItem);
@@ -611,21 +620,6 @@ public class GlobalRepresentationController extends Controller
 
 				this.globalRepresentation.add(case_, y, x);
 				index++;
-			}
-		}
-	}
-
-	/**
-	 * Initialize the home attribute.
-	 */
-	private void initializeHomeAttribute()
-	{
-		for (GroupOfPlants currentGroupOfPlants : this.allGroupsOfPlants)
-		{
-			if (currentGroupOfPlants.getWording().equals("maison"))
-			{
-				this.home = currentGroupOfPlants;
-				break;
 			}
 		}
 	}
