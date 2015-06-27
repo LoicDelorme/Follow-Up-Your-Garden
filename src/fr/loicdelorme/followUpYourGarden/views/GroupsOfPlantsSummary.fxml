@@ -45,7 +45,7 @@
       </MenuBar>
       <HBox spacing="15.0">
          <children>
-            <Button fx:id="taskToBeCarryOutSchedule" mnemonicParsing="false" onAction="#onTaskToBeCarryOutScheduleAction" />
+            <Button fx:id="tasksToBeCarryOutSchedule" mnemonicParsing="false" onAction="#onTasksToBeCarryOutScheduleAction" />
             <Button fx:id="globalRepresentation" mnemonicParsing="false" onAction="#onGlobalRepresentationAction" />
          </children>
          <padding>
