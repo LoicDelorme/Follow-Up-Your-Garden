@@ -45,12 +45,21 @@
       </MenuBar>
       <HBox spacing="15.0">
          <children>
+            <Button fx:id="groupsOfPlantsSummary" mnemonicParsing="false" onAction="#onGroupsOfPlantsSummaryAction" />
+            <Button fx:id="globalRepresentation" mnemonicParsing="false" onAction="#onGlobalRepresentationAction" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
+      <HBox spacing="15.0">
+         <children>
             <Button fx:id="validateTaskToBeCarryOut" mnemonicParsing="false" onAction="#onValidateTaskToBeCarryOutAction" />
             <Button fx:id="updateTaskToBeCarryOut" mnemonicParsing="false" onAction="#onUpdateTaskToBeCarryOutAction" />
             <Button fx:id="removeTaskToBeCarryOut" mnemonicParsing="false" onAction="#onRemoveTaskToBeCarryOutAction" />
          </children>
          <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="15.0" left="15.0" right="15.0" />
          </padding>
       </HBox>
       <HBox>
