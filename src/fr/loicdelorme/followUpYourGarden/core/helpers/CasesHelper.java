@@ -48,7 +48,7 @@ public class CasesHelper
 			groupOfPlants = groupsOfPlantsMap.get(currentOccupiedPosition.getGroupOfPlantsId());
 			if (groupOfPlants.getWording().equals("maison"))
 			{
-				cases.add(new Case(currentOccupiedPosition, Color.BROWN, false, true));
+				cases.add(new Case(currentOccupiedPosition, groupOfPlants.getIconColor(), false, true));
 			}
 			else
 			{
