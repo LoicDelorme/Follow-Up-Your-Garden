@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import fr.loicdelorme.followUpYourGarden.core.properties.IDimensionsReader;
-import fr.loicdelorme.followUpYourGarden.core.properties.IPropertiesConstants;
+import fr.loicdelorme.followUpYourGarden.core.properties.IConstants;
 
 /**
  * This class allow you to read dimensions configuration data into a properties file.
@@ -42,7 +42,7 @@ public class DimensionsPropertiesReader implements IDimensionsReader
 	public DimensionsPropertiesReader() throws FileNotFoundException, IOException
 	{
 		this.properties = new Properties();
-		openPropertiesFile(IPropertiesConstants.DIMENSIONS_CONFIGURATION_FILE);
+		openPropertiesFile(IConstants.DIMENSIONS_CONFIGURATION_FILE);
 	}
 
 	/**
