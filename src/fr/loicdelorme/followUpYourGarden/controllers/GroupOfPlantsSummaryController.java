@@ -26,11 +26,7 @@ import fr.loicdelorme.followUpYourGarden.core.models.GroupOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
-import fr.loicdelorme.followUpYourGarden.core.services.CarriedOutTaskServices;
-import fr.loicdelorme.followUpYourGarden.core.services.GroupOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TaskToBeCarryOutServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfTasksServices;
+import fr.loicdelorme.followUpYourGarden.core.services.FollowUpYourGardenServices;
 
 /**
  * This class allow you to control the group of plants summary.
@@ -152,7 +148,7 @@ public class GroupOfPlantsSummaryController extends Controller
 	 * The task to be carry out schedule button.
 	 */
 	@FXML
-	private Button taskToBeCarryOutSchedule;
+	private Button tasksToBeCarryOutSchedule;
 
 	/**
 	 * The global representation button.
@@ -172,29 +168,9 @@ public class GroupOfPlantsSummaryController extends Controller
 	private TreeItem<Object> root;
 
 	/**
-	 * The group of plants services.
+	 * The follow up your garden services.
 	 */
-	private GroupOfPlantsServices groupOfPlantsServices;
-
-	/**
-	 * The task to be carry out services.
-	 */
-	private TaskToBeCarryOutServices taskToBeCarryOutServices;
-
-	/**
-	 * The carried out task services.
-	 */
-	private CarriedOutTaskServices carriedOutTaskServices;
-
-	/**
-	 * The type of plants services.
-	 */
-	private TypeOfPlantsServices typeOfPlantsServices;
-
-	/**
-	 * The type of tasks services.
-	 */
-	private TypeOfTasksServices typeOfTasksServices;
+	private FollowUpYourGardenServices followUpYourGardenServices;
 
 	/**
 	 * The width.
@@ -213,31 +189,18 @@ public class GroupOfPlantsSummaryController extends Controller
 	 *            The width.
 	 * @param height
 	 *            The height.
-	 * @param groupOfPlantsServices
-	 *            The group of plants services.
-	 * 
-	 * @param taskToBeCarryOutServices
-	 *            The task to be carry out services.
-	 * @param carriedOutTaskServices
-	 *            The carried out task services.
-	 * @param typeOfPlantsServices
-	 *            The type of plants services.
-	 * @param typeOfTasksServices
-	 *            The type of tasks services.
+	 * @param followUpYourGardenServices
+	 *            The follow up your garden services.
 	 * @param stage
 	 *            The stage.
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public void initializeData(int width, int height, GroupOfPlantsServices groupOfPlantsServices, TaskToBeCarryOutServices taskToBeCarryOutServices, CarriedOutTaskServices carriedOutTaskServices, TypeOfPlantsServices typeOfPlantsServices, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(int width, int height, FollowUpYourGardenServices followUpYourGardenServices, Stage stage, ResourceBundle bundle)
 	{
 		this.width = width;
 		this.height = height;
-		this.groupOfPlantsServices = groupOfPlantsServices;
-		this.taskToBeCarryOutServices = taskToBeCarryOutServices;
-		this.carriedOutTaskServices = carriedOutTaskServices;
-		this.typeOfPlantsServices = typeOfPlantsServices;
-		this.typeOfTasksServices = typeOfTasksServices;
+		this.followUpYourGardenServices = followUpYourGardenServices;
 		this.stage = stage;
 		this.bundle = bundle;
 
@@ -260,7 +223,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		this.updateGroupOfPlants.setText(this.bundle.getString("groupOfPlantsSummaryUpdateGroupOfPlantsButton"));
 		this.removeGroupOfPlants.setText(this.bundle.getString("groupOfPlantsSummaryRemoveGroupOfPlantsButton"));
 		this.groupOfPlantsHistoric.setText(this.bundle.getString("groupOfPlantsSummaryGroupOfPlantsHistoricButton"));
-		this.taskToBeCarryOutSchedule.setText(this.bundle.getString("groupOfPlantsSummaryTaskToBeCarryOutScheduleButton"));
+		this.tasksToBeCarryOutSchedule.setText(this.bundle.getString("groupOfPlantsSummaryTaskToBeCarryOutScheduleButton"));
 		this.globalRepresentation.setText(this.bundle.getString("groupOfPlantsSummaryGlobalRepresentationButton"));
 
 		this.addTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/summary/add.png"));
@@ -301,7 +264,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		stage.setScene(new Scene(loader.load()));
 
 		TypeOfPlantsFormController controller = loader.getController();
-		controller.initializeData(null, this.typeOfPlantsServices, stage, this.bundle);
+		controller.initializeData(null, this.followUpYourGardenServices.getTypeOfPlantsServices(), stage, this.bundle);
 
 		stage.showAndWait();
 	}
@@ -317,7 +280,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		List<TypeOfPlants> typesOfPlants = null;
 		try
 		{
-			typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
+			typesOfPlants = this.followUpYourGardenServices.getTypeOfPlantsServices().getTypesOfPlants();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -344,7 +307,7 @@ public class GroupOfPlantsSummaryController extends Controller
 			stage_.setScene(new Scene(loader_.load()));
 
 			TypeOfPlantsFormController controller_ = loader_.getController();
-			controller_.initializeData(typeOfPlantsToUpdate, this.typeOfPlantsServices, stage_, this.bundle);
+			controller_.initializeData(typeOfPlantsToUpdate, this.followUpYourGardenServices.getTypeOfPlantsServices(), stage_, this.bundle);
 
 			stage_.showAndWait();
 		}
@@ -359,10 +322,9 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onRemoveTypeOfPlantsAction() throws IOException
 	{
 		List<TypeOfPlants> typesOfPlants = null;
-
 		try
 		{
-			typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
+			typesOfPlants = this.followUpYourGardenServices.getTypeOfPlantsServices().getTypesOfPlants();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e1)
 		{
@@ -385,7 +347,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		{
 			try
 			{
-				this.typeOfPlantsServices.removeTypeOfPlants(typeOfPlantsToRemove);
+				this.followUpYourGardenServices.getTypeOfPlantsServices().removeTypeOfPlants(typeOfPlantsToRemove);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfPlantsRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e2)
@@ -409,7 +371,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		stage.setScene(new Scene(loader.load()));
 
 		TypeOfTasksFormController controller = loader.getController();
-		controller.initializeData(null, this.typeOfTasksServices, stage, this.bundle);
+		controller.initializeData(null, this.followUpYourGardenServices.getTypeOfTasksServices(), stage, this.bundle);
 
 		stage.showAndWait();
 	}
@@ -423,10 +385,9 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onUpdateTypeOfTasksAction() throws IOException
 	{
 		List<TypeOfTasks> typesOfTasks = null;
-
 		try
 		{
-			typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
+			typesOfTasks = this.followUpYourGardenServices.getTypeOfTasksServices().getTypesOfTasks();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -453,7 +414,7 @@ public class GroupOfPlantsSummaryController extends Controller
 			stage_.setScene(new Scene(loader_.load()));
 
 			TypeOfTasksFormController controller_ = loader_.getController();
-			controller_.initializeData(typeOfTasksToUpdate, this.typeOfTasksServices, stage_, this.bundle);
+			controller_.initializeData(typeOfTasksToUpdate, this.followUpYourGardenServices.getTypeOfTasksServices(), stage_, this.bundle);
 
 			stage_.showAndWait();
 		}
@@ -468,10 +429,9 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onRemoveTypeOfTasksAction() throws IOException
 	{
 		List<TypeOfTasks> typesOfTasks = null;
-
 		try
 		{
-			typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
+			typesOfTasks = this.followUpYourGardenServices.getTypeOfTasksServices().getTypesOfTasks();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -494,7 +454,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		{
 			try
 			{
-				this.typeOfTasksServices.removeTypeOfTasks(typeOfTasksToRemove);
+				this.followUpYourGardenServices.getTypeOfTasksServices().removeTypeOfTasks(typeOfTasksToRemove);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfTasksRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
@@ -529,8 +489,7 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onAddTaskToBeCarryOutAction() throws IOException
 	{
 		TreeItem<Object> selectedItem = this.groupsOfPlants.getSelectionModel().getSelectedItem();
-		boolean isCorrectInstance = (selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false);
-		if (selectedItem != null && isCorrectInstance)
+		if ((selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false))
 		{
 			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
@@ -538,8 +497,8 @@ public class GroupOfPlantsSummaryController extends Controller
 			List<TaskToBeCarryOut> tasksToBeCarryOut = null;
 			try
 			{
-				typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
-				tasksToBeCarryOut = this.taskToBeCarryOutServices.getTasksToBeCarryOut(selectedGroupOfPlants.getId());
+				typesOfTasks = this.followUpYourGardenServices.getTypeOfTasksServices().getTypesOfTasks();
+				tasksToBeCarryOut = this.followUpYourGardenServices.getTaskToBeCarryOutServices().getTasksToBeCarryOut(selectedGroupOfPlants.getId());
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
 			{
@@ -552,7 +511,7 @@ public class GroupOfPlantsSummaryController extends Controller
 			stage.setScene(new Scene(loader.load()));
 
 			TaskToBeCarryOutAdditionFormController controller = loader.getController();
-			controller.initializeData(selectedGroupOfPlants, TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut), this.taskToBeCarryOutServices, stage, this.bundle);
+			controller.initializeData(selectedGroupOfPlants, TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut), this.followUpYourGardenServices.getTaskToBeCarryOutServices(), stage, this.bundle);
 
 			stage.showAndWait();
 		}
@@ -574,8 +533,8 @@ public class GroupOfPlantsSummaryController extends Controller
 		List<GroupOfPlants> allGroupsOfPlants = null;
 		try
 		{
-			typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
-			allGroupsOfPlants = this.groupOfPlantsServices.getGroupsOfPlants();
+			typesOfPlants = this.followUpYourGardenServices.getTypeOfPlantsServices().getTypesOfPlants();
+			allGroupsOfPlants = this.followUpYourGardenServices.getGroupOfPlantsServices().getGroupsOfPlants();
 		}
 		catch (ClassNotFoundException | SQLException e)
 		{
@@ -588,7 +547,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		stage.setScene(new Scene(loader.load()));
 
 		GroupOfPlantsFormController controller = loader.getController();
-		controller.initializeData(null, typesOfPlants, CasesHelper.generateCasesForAddingGroupOfPlants(this.width, this.height, allGroupsOfPlants), this.width, this.height, this.groupOfPlantsServices, stage, this.bundle);
+		controller.initializeData(null, typesOfPlants, CasesHelper.generateCasesForAddingGroupOfPlants(this.width, this.height, allGroupsOfPlants), this.width, this.height, this.followUpYourGardenServices.getGroupOfPlantsServices(), stage, this.bundle);
 
 		stage.showAndWait();
 
@@ -604,15 +563,14 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onUpdateGroupOfPlantsAction() throws IOException
 	{
 		TreeItem<Object> selectedItem = this.groupsOfPlants.getSelectionModel().getSelectedItem();
-		boolean isCorrectInstance = (selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false);
-		if (selectedItem != null && isCorrectInstance)
+		if ((selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false))
 		{
 			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
 			List<GroupOfPlants> allGroupsOfPlants = null;
 			try
 			{
-				allGroupsOfPlants = this.groupOfPlantsServices.getGroupsOfPlants();
+				allGroupsOfPlants = this.followUpYourGardenServices.getGroupOfPlantsServices().getGroupsOfPlants();
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
 			{
@@ -625,7 +583,7 @@ public class GroupOfPlantsSummaryController extends Controller
 			stage.setScene(new Scene(loader.load()));
 
 			GroupOfPlantsFormController controller = loader.getController();
-			controller.initializeData(selectedGroupOfPlants, selectedGroupOfPlants.getTypesOfPlants(), CasesHelper.generateCasesForUpdatingGroupOfPlants(this.width, this.height, allGroupsOfPlants, selectedGroupOfPlants), this.width, this.height, this.groupOfPlantsServices, stage, this.bundle);
+			controller.initializeData(selectedGroupOfPlants, selectedGroupOfPlants.getTypesOfPlants(), CasesHelper.generateCasesForUpdatingGroupOfPlants(this.width, this.height, allGroupsOfPlants, selectedGroupOfPlants), this.width, this.height, this.followUpYourGardenServices.getGroupOfPlantsServices(), stage, this.bundle);
 
 			stage.showAndWait();
 
@@ -643,8 +601,7 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onRemoveGroupOfPlantsAction()
 	{
 		TreeItem<Object> selectedItem = this.groupsOfPlants.getSelectionModel().getSelectedItem();
-		boolean isCorrectInstance = (selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false);
-		if (selectedItem != null && isCorrectInstance)
+		if ((selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false))
 		{
 			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
@@ -652,7 +609,7 @@ public class GroupOfPlantsSummaryController extends Controller
 			{
 				try
 				{
-					this.groupOfPlantsServices.removeGroupOfPlants(selectedGroupOfPlants);
+					this.followUpYourGardenServices.getGroupOfPlantsServices().removeGroupOfPlants(selectedGroupOfPlants);
 					this.displayInformation(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalSuccess"));
 					updateGroupsOfPlants();
 				}
@@ -674,15 +631,14 @@ public class GroupOfPlantsSummaryController extends Controller
 	public void onGroupOfPlantsHistoricAction()
 	{
 		TreeItem<Object> selectedItem = this.groupsOfPlants.getSelectionModel().getSelectedItem();
-		boolean isCorrectInstance = (selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false);
-		if (selectedItem != null && isCorrectInstance)
+		if ((selectedItem != null ? selectedItem.getValue() instanceof GroupOfPlants : false))
 		{
 			GroupOfPlants selectedGroupOfPlants = (GroupOfPlants) selectedItem.getValue();
 
 			List<CarriedOutTask> carriedOutTasks = null;
 			try
 			{
-				carriedOutTasks = this.carriedOutTaskServices.getCarriedOutTasks(selectedGroupOfPlants.getId());
+				carriedOutTasks = this.followUpYourGardenServices.getCarriedOutTaskServices().getCarriedOutTasks(selectedGroupOfPlants.getId());
 			}
 			catch (ClassNotFoundException | IOException | SQLException e)
 			{
@@ -703,14 +659,14 @@ public class GroupOfPlantsSummaryController extends Controller
 	 * @throws IOException
 	 *             If the file can't be opened.
 	 */
-	public void onTaskToBeCarryOutScheduleAction() throws IOException
+	public void onTasksToBeCarryOutScheduleAction() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TasksToBeCarryOutSchedule.fxml"));
 
 		this.stage.setScene(new Scene(loader.load()));
 
 		TasksToBeCarryOutScheduleController controller = loader.getController();
-		controller.initializeData(this.taskToBeCarryOutServices, this.typeOfPlantsServices, this.typeOfTasksServices, this.stage, this.bundle);
+		controller.initializeData(this.width, this.height, this.followUpYourGardenServices, this.stage, this.bundle);
 
 		this.stage.show();
 	}
@@ -728,7 +684,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		this.stage.setScene(new Scene(loader.load()));
 
 		GlobalRepresentationController controller = loader.getController();
-		controller.initializeData(this.stage, this.bundle);
+		controller.initializeData(this.width, this.height, this.followUpYourGardenServices, this.stage, this.bundle);
 
 		this.stage.show();
 	}
@@ -741,7 +697,7 @@ public class GroupOfPlantsSummaryController extends Controller
 		List<GroupOfPlants> groupsOfPlants = null;
 		try
 		{
-			groupsOfPlants = this.groupOfPlantsServices.getGroupsOfPlants();
+			groupsOfPlants = this.followUpYourGardenServices.getGroupOfPlantsServices().getGroupsOfPlants();
 		}
 		catch (ClassNotFoundException | IOException | SQLException e)
 		{
@@ -761,7 +717,6 @@ public class GroupOfPlantsSummaryController extends Controller
 			}
 
 			groupOfPlantsTreeItem.setExpanded(true);
-
 			this.root.getChildren().add(groupOfPlantsTreeItem);
 		}
 	}
