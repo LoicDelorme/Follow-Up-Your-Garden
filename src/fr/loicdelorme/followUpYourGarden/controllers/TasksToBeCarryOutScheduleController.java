@@ -24,9 +24,8 @@ import fr.loicdelorme.followUpYourGarden.core.models.ContentSelectorType;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfTasks;
+import fr.loicdelorme.followUpYourGarden.core.services.FollowUpYourGardenServices;
 import fr.loicdelorme.followUpYourGarden.core.services.TaskToBeCarryOutServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfPlantsServices;
-import fr.loicdelorme.followUpYourGarden.core.services.TypeOfTasksServices;
 
 /**
  * This class allow you to control the task to be carry out schedule.
@@ -133,6 +132,18 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	private Button removeTaskToBeCarryOut;
 
 	/**
+	 * The groups of plants summary button.
+	 */
+	@FXML
+	private Button groupsOfPlantsSummary;
+
+	/**
+	 * The global representation button.
+	 */
+	@FXML
+	private Button globalRepresentation;
+
+	/**
 	 * The schedule.
 	 */
 	@FXML
@@ -175,44 +186,39 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	private TableColumn<TaskToBeCarryOut, String> descriptionColumn;
 
 	/**
-	 * The list of tasks to be carry out.
+	 * The follow up your garden services.
 	 */
-	private List<TaskToBeCarryOut> tasksToBeCarryOut;
+	private FollowUpYourGardenServices followUpYourGardenServices;
 
 	/**
-	 * The task to be carry out services.
+	 * The width.
 	 */
-	private TaskToBeCarryOutServices taskToBeCarryOutServices;
+	private int width;
 
 	/**
-	 * The type of plants services.
+	 * The height.
 	 */
-	private TypeOfPlantsServices typeOfPlantsServices;
-
-	/**
-	 * The type of tasks services.
-	 */
-	private TypeOfTasksServices typeOfTasksServices;
+	private int height;
 
 	/**
 	 * Initialize data.
 	 * 
-	 * @param taskToBeCarryOutServices
-	 *            The task to be carry out services.
-	 * @param typeOfPlantsServices
-	 *            The type of plants services.
-	 * @param typeOfTasksServices
-	 *            The type of tasks services.
+	 * @param width
+	 *            The width.
+	 * @param height
+	 *            The height.
+	 * @param followUpYourGardenServices
+	 *            The follow up your garden services.
 	 * @param stage
 	 *            The stage.
 	 * @param bundle
 	 *            The bundle.
 	 */
-	public void initializeData(TaskToBeCarryOutServices taskToBeCarryOutServices, TypeOfPlantsServices typeOfPlantsServices, TypeOfTasksServices typeOfTasksServices, Stage stage, ResourceBundle bundle)
+	public void initializeData(int width, int height, FollowUpYourGardenServices followUpYourGardenServices, Stage stage, ResourceBundle bundle)
 	{
-		this.taskToBeCarryOutServices = taskToBeCarryOutServices;
-		this.typeOfPlantsServices = typeOfPlantsServices;
-		this.typeOfTasksServices = typeOfTasksServices;
+		this.width = width;
+		this.height = height;
+		this.followUpYourGardenServices = followUpYourGardenServices;
 		this.stage = stage;
 		this.bundle = bundle;
 
@@ -233,6 +239,8 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		this.validateTaskToBeCarryOut.setText(this.bundle.getString("taskToBeCarryOutScheduleValidateButton"));
 		this.updateTaskToBeCarryOut.setText(this.bundle.getString("taskToBeCarryOutScheduleUpdateButton"));
 		this.removeTaskToBeCarryOut.setText(this.bundle.getString("taskToBeCarryOutScheduleRemoveButton"));
+		this.groupsOfPlantsSummary.setText(this.bundle.getString("taskToBeCarryOutScheduleGroupsOfPlantsSummaryButton"));
+		this.globalRepresentation.setText(this.bundle.getString("taskToBeCarryOutScheduleGlobalRepresentationButton"));
 
 		this.validateTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/schedule/validate.png"));
 		this.updateTaskToBeCarryOut.setGraphic(new ImageView("fr/loicdelorme/followUpYourGarden/views/images/schedule/update.png"));
@@ -288,7 +296,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		stage.setScene(new Scene(loader.load()));
 
 		TypeOfPlantsFormController controller = loader.getController();
-		controller.initializeData(null, this.typeOfPlantsServices, stage, this.bundle);
+		controller.initializeData(null, this.followUpYourGardenServices.getTypeOfPlantsServices(), stage, this.bundle);
 
 		stage.showAndWait();
 	}
@@ -304,7 +312,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		List<TypeOfPlants> typesOfPlants = null;
 		try
 		{
-			typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
+			typesOfPlants = this.followUpYourGardenServices.getTypeOfPlantsServices().getTypesOfPlants();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -331,7 +339,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 			stage_.setScene(new Scene(loader_.load()));
 
 			TypeOfPlantsFormController controller_ = loader_.getController();
-			controller_.initializeData(typeOfPlantsToUpdate, this.typeOfPlantsServices, stage_, this.bundle);
+			controller_.initializeData(typeOfPlantsToUpdate, this.followUpYourGardenServices.getTypeOfPlantsServices(), stage_, this.bundle);
 
 			stage_.showAndWait();
 		}
@@ -346,10 +354,9 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	public void onRemoveTypeOfPlantsAction() throws IOException
 	{
 		List<TypeOfPlants> typesOfPlants = null;
-
 		try
 		{
-			typesOfPlants = this.typeOfPlantsServices.getTypesOfPlants();
+			typesOfPlants = this.followUpYourGardenServices.getTypeOfPlantsServices().getTypesOfPlants();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e1)
 		{
@@ -372,7 +379,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		{
 			try
 			{
-				this.typeOfPlantsServices.removeTypeOfPlants(typeOfPlantsToRemove);
+				this.followUpYourGardenServices.getTypeOfPlantsServices().removeTypeOfPlants(typeOfPlantsToRemove);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfPlantsRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e2)
@@ -396,7 +403,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		stage.setScene(new Scene(loader.load()));
 
 		TypeOfTasksFormController controller = loader.getController();
-		controller.initializeData(null, this.typeOfTasksServices, stage, this.bundle);
+		controller.initializeData(null, this.followUpYourGardenServices.getTypeOfTasksServices(), stage, this.bundle);
 
 		stage.showAndWait();
 	}
@@ -410,10 +417,9 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	public void onUpdateTypeOfTasksAction() throws IOException
 	{
 		List<TypeOfTasks> typesOfTasks = null;
-
 		try
 		{
-			typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
+			typesOfTasks = this.followUpYourGardenServices.getTypeOfTasksServices().getTypesOfTasks();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -440,7 +446,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 			stage_.setScene(new Scene(loader_.load()));
 
 			TypeOfTasksFormController controller_ = loader_.getController();
-			controller_.initializeData(typeOfTasksToUpdate, this.typeOfTasksServices, stage_, this.bundle);
+			controller_.initializeData(typeOfTasksToUpdate, this.followUpYourGardenServices.getTypeOfTasksServices(), stage_, this.bundle);
 
 			stage_.showAndWait();
 		}
@@ -455,10 +461,9 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	public void onRemoveTypeOfTasksAction() throws IOException
 	{
 		List<TypeOfTasks> typesOfTasks = null;
-
 		try
 		{
-			typesOfTasks = this.typeOfTasksServices.getTypesOfTasks();
+			typesOfTasks = this.followUpYourGardenServices.getTypeOfTasksServices().getTypesOfTasks();
 		}
 		catch (ClassNotFoundException | SQLException | IOException e)
 		{
@@ -481,7 +486,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		{
 			try
 			{
-				this.typeOfTasksServices.removeTypeOfTasks(typeOfTasksToRemove);
+				this.followUpYourGardenServices.getTypeOfTasksServices().removeTypeOfTasks(typeOfTasksToRemove);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("typeOfTasksRemovalSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
@@ -517,7 +522,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		{
 			try
 			{
-				this.taskToBeCarryOutServices.validateTaskToBeCarryOut(selectedTaskToBeCarryOut);
+				this.followUpYourGardenServices.getTaskToBeCarryOutServices().validateTaskToBeCarryOut(selectedTaskToBeCarryOut);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("taskToBeCarryOutValidateSuccess"));
 			}
 			catch (ClassNotFoundException | SQLException | IOException e)
@@ -550,7 +555,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 			stage.setScene(new Scene(loader.load()));
 
 			TaskToBeCarryOutUpdatingFormController controller = loader.getController();
-			controller.initializeData(selectedTaskToBeCarryOut, this.taskToBeCarryOutServices, stage, this.bundle);
+			controller.initializeData(selectedTaskToBeCarryOut, this.followUpYourGardenServices.getTaskToBeCarryOutServices(), stage, this.bundle);
 
 			stage.showAndWait();
 
@@ -574,7 +579,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 			{
 				try
 				{
-					this.taskToBeCarryOutServices.removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
+					this.followUpYourGardenServices.getTaskToBeCarryOutServices().removeTaskToBeCarryOut(selectedTaskToBeCarryOut);
 					this.displayInformation(this.bundle.getString("taskToBeCarryOutRemovalConfirmation"), this.bundle.getString("taskToBeCarryOutRemovalSuccess"));
 					updateSchedule();
 				}
@@ -591,13 +596,51 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	}
 
 	/**
+	 * The on click groups of plants summary action.
+	 * 
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 */
+	public void onGroupsOfPlantsSummaryAction() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/GroupsOfPlantsSummary.fxml"));
+
+		this.stage.setScene(new Scene(loader.load()));
+
+		GroupOfPlantsSummaryController controller = loader.getController();
+		controller.initializeData(this.width, this.height, this.followUpYourGardenServices, this.stage, this.bundle);
+
+		this.stage.show();
+	}
+
+	/**
+	 * The on click global representation action.
+	 * 
+	 * @throws IOException
+	 *             If the file can't be opened.
+	 */
+	public void onGlobalRepresentationAction() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/GlobalRepresentation.fxml"));
+
+		this.stage.setScene(new Scene(loader.load()));
+
+		GlobalRepresentationController controller = loader.getController();
+		controller.initializeData(this.width, this.height, this.followUpYourGardenServices, this.stage, this.bundle);
+
+		this.stage.show();
+	}
+
+	/**
 	 * Update the schedule.
 	 */
 	private void updateSchedule()
 	{
+		TaskToBeCarryOutServices taskToBeCarryOutServices = this.followUpYourGardenServices.getTaskToBeCarryOutServices();
+		List<TaskToBeCarryOut> tasksToBeCarryOut = null;
 		try
 		{
-			this.tasksToBeCarryOut = this.taskToBeCarryOutServices.getTasksToBeCarryOut();
+			tasksToBeCarryOut = taskToBeCarryOutServices.getTasksToBeCarryOut();
 		}
 		catch (ClassNotFoundException | IOException | SQLException e)
 		{
@@ -605,6 +648,6 @@ public class TasksToBeCarryOutScheduleController extends Controller
 		}
 
 		this.schedule.getItems().clear();
-		this.schedule.setItems(FXCollections.observableArrayList(this.tasksToBeCarryOut));
+		this.schedule.setItems(FXCollections.observableArrayList(tasksToBeCarryOut));
 	}
 }
