@@ -256,9 +256,9 @@ public class GlobalRepresentationController extends Controller
 			this.processException(e);
 		}
 
-		this.allLegendItems = LegendItemsHelper.generateLegend(this.allGroupsOfPlants);
 		this.groupsOfPlants.getItems().addAll(this.allGroupsOfPlants);
 		this.allGroupsOfPlants.add(this.home);
+		this.allLegendItems = LegendItemsHelper.generateLegend(this.allGroupsOfPlants);
 
 		updateGlobalRepresentation(CasesHelper.generateGlobalRepresentationCases(this.width, this.height, this.allGroupsOfPlants), this.allLegendItems);
 
