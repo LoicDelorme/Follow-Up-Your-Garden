@@ -46,7 +46,7 @@ public class CasesHelper
 		for (Position currentOccupiedPosition : occupiedPositions)
 		{
 			groupOfPlants = groupsOfPlantsMap.get(currentOccupiedPosition.getGroupOfPlantsId());
-			if (groupOfPlants.getWording().equals("MAISON"))
+			if (groupOfPlants.getWording().equals("maison"))
 			{
 				cases.add(new Case(currentOccupiedPosition, Color.BROWN, false, true));
 			}
@@ -59,7 +59,7 @@ public class CasesHelper
 		List<Position> availablePositions = PositionsHelper.getAvailablePositions(width, height, occupiedPositions);
 		for (Position currentAvailablePosition : availablePositions)
 		{
-			cases.add(new Case(currentAvailablePosition, Color.WHITE, false, false));
+			cases.add(new Case(currentAvailablePosition, Color.WHITE, false, true));
 		}
 
 		cases.sort(null);
