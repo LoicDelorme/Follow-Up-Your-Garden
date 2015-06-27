@@ -505,13 +505,20 @@ public class GroupOfPlantsSummaryController extends Controller
 				this.processException(e);
 			}
 
+			List<TypeOfTasks> availableTypesOfTasks = TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut);
+			
+			if (availableTypesOfTasks.isEmpty()) {
+				this.displayInformation(this.bundle.getString("groupOfPlantsSummaryNoTypeOfTasksAvailableTitle"), this.bundle.getString("groupOfPlantsSummaryNoTypeOfTasksAvailableContent"));
+				return;
+			}
+
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fr/loicdelorme/followUpYourGarden/views/TaskToBeCarryOutAdditionForm.fxml"));
 
 			Stage stage = new Stage();
 			stage.setScene(new Scene(loader.load()));
 
 			TaskToBeCarryOutAdditionFormController controller = loader.getController();
-			controller.initializeData(selectedGroupOfPlants, TypesOfTasksHelper.getAvailableTypesOfTasks(typesOfTasks, tasksToBeCarryOut), this.followUpYourGardenServices.getTaskToBeCarryOutServices(), stage, this.bundle);
+			controller.initializeData(selectedGroupOfPlants, availableTypesOfTasks, this.followUpYourGardenServices.getTaskToBeCarryOutServices(), stage, this.bundle);
 
 			stage.showAndWait();
 		}
