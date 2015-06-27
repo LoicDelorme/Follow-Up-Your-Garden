@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import fr.loicdelorme.followUpYourGarden.core.database.MyDatabase;
+import fr.loicdelorme.followUpYourGarden.core.helpers.ImagesHelper;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IGroupOfPlantsManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.IPositionManipulator;
 import fr.loicdelorme.followUpYourGarden.core.manipulators.models.ITypeOfPlantsManipulator;
@@ -53,6 +54,11 @@ public class GroupOfPlantsServices
 	 * The maximal level value.
 	 */
 	private static final double MAXIMAL_LEVEL_VALUE = 1;
+
+	/**
+	 * The image path.
+	 */
+	private static final String IMAGE_PATH = "./data/images/";
 
 	/**
 	 * A group of plants manipulator.
@@ -166,8 +172,7 @@ public class GroupOfPlantsServices
 	 * @throws IOException
 	 *             If the file can't be opened.
 	 */
-	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException,
-	        FileNotFoundException, IOException
+	public void addGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, path, iconColor, typesOfPlants, positions);
 
@@ -175,7 +180,7 @@ public class GroupOfPlantsServices
 		sourceManipulator.openConnection();
 
 		this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
-		this.groupOfPlantsManipulator.addGroupOfPlants(new GroupOfPlants(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, path, iconColor, typesOfPlants, positions), this.positionManipulator);
+		this.groupOfPlantsManipulator.addGroupOfPlants(new GroupOfPlants(GroupOfPlants.UNKNOWN_GROUP_OF_PLANTS_ID, wording, plantingDate, ImagesHelper.copy(path, IMAGE_PATH), iconColor, typesOfPlants, positions), this.positionManipulator);
 
 		sourceManipulator.closeConnection();
 	}
@@ -236,12 +241,18 @@ public class GroupOfPlantsServices
 	 * @throws IOException
 	 *             If the file can't be opened.
 	 */
-	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException,
-	        SQLException, ClassNotFoundException, FileNotFoundException, IOException
+	public void updateGroupOfPlants(String wording, LocalDate plantingDate, String path, Color iconColor, List<TypeOfPlants> typesOfPlants, List<Position> positions, GroupOfPlants oldGroupOfPlants) throws MissingGroupOfPlantsIdException, MissingGroupOfPlantsWordingException, MissingGroupOfPlantsPlantingDateException, MissingGroupOfPlantsPathException, MissingGroupOfPlantsIconColorException, MissingGroupOfPlantsTypesOfPlantsException, MissingGroupOfPlantsPositionsException, InvalidGroupOfPlantsIdException, InvalidGroupOfPlantsWordingException, InvalidGroupOfPlantsPathException, InvalidGroupOfPlantsRedLevelException, InvalidGroupOfPlantsGreenLevelException, InvalidGroupOfPlantsBlueLevelException, InvalidGroupOfPlantsTypesOfPlantsException, InvalidGroupOfPlantsPositionsException, SQLException, ClassNotFoundException, FileNotFoundException, IOException
 	{
 		checkGroupOfPlantsParameters(oldGroupOfPlants.getId(), wording, plantingDate, path, iconColor, typesOfPlants, positions);
 
-		GroupOfPlants newGroupOfPlants = new GroupOfPlants(oldGroupOfPlants.getId(), wording, plantingDate, path, iconColor, typesOfPlants, positions);
+		String newPath = path;
+		if (!oldGroupOfPlants.getPath().equals(path))
+		{
+			ImagesHelper.delete(oldGroupOfPlants.getPath());
+			newPath = ImagesHelper.copy(path, IMAGE_PATH);
+		}
+
+		GroupOfPlants newGroupOfPlants = new GroupOfPlants(oldGroupOfPlants.getId(), wording, plantingDate, newPath, iconColor, typesOfPlants, positions);
 
 		if (!oldGroupOfPlants.equals(newGroupOfPlants))
 		{
@@ -276,6 +287,7 @@ public class GroupOfPlantsServices
 
 		this.groupOfPlantsManipulator.setConnection(sourceManipulator.getConnection());
 		this.groupOfPlantsManipulator.removeGroupOfPlants(groupOfPlantsToRemove);
+		ImagesHelper.delete(groupOfPlantsToRemove.getPath());
 
 		sourceManipulator.closeConnection();
 	}
