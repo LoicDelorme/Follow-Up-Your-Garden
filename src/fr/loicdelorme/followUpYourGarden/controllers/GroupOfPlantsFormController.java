@@ -290,11 +290,11 @@ public class GroupOfPlantsFormController extends Controller
 		{
 			if (this.isUpdateForm)
 			{
-				List<TypeOfPlants> typesOfPlants = new ArrayList<TypeOfPlants>();
-				typesOfPlants.addAll(this.groupOfPlants.getTypesOfPlants());
-				typesOfPlants.removeAll(this.typesOfPlants.getSelectionModel().getSelectedItems());
+				List<TypeOfPlants> finalTypesOfPlants = new ArrayList<TypeOfPlants>();
+				finalTypesOfPlants.addAll(this.groupOfPlants.getTypesOfPlants());
+				finalTypesOfPlants.removeAll(this.typesOfPlants.getSelectionModel().getSelectedItems());
 
-				this.groupOfPlantsServices.updateGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), typesOfPlants, this.finalPositions, this.groupOfPlants);
+				this.groupOfPlantsServices.updateGroupOfPlants(this.wording.getText().trim(), this.plantingDate.getValue(), this.imagePath.getText().trim(), this.iconColor.getValue(), finalTypesOfPlants, this.finalPositions, this.groupOfPlants);
 				this.displayInformation(this.bundle.getString("operationSuccess"), this.bundle.getString("groupOfPlantsModificationSuccess"));
 				this.stage.close();
 			}
