@@ -34,7 +34,7 @@ import fr.loicdelorme.followUpYourGarden.core.services.FollowUpYourGardenService
  * @author DELORME Loïc
  * @version 1.0.0
  */
-public class GroupOfPlantsSummaryController extends Controller
+public class GroupsOfPlantsSummaryController extends Controller
 {
 	/**
 	 * The actions menu.
