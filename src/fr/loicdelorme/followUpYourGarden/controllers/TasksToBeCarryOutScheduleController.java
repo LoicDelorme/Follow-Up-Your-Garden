@@ -607,7 +607,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 
 		this.stage.setScene(new Scene(loader.load()));
 
-		GroupOfPlantsSummaryController controller = loader.getController();
+		GroupsOfPlantsSummaryController controller = loader.getController();
 		controller.initializeData(this.width, this.height, this.followUpYourGardenServices, this.stage, this.bundle);
 
 		this.stage.show();
