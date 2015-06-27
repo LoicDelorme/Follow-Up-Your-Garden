@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,11 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import fr.loicdelorme.followUpYourGarden.core.models.ContentSelectorType;
 import fr.loicdelorme.followUpYourGarden.core.models.TaskToBeCarryOut;
 import fr.loicdelorme.followUpYourGarden.core.models.TypeOfPlants;
@@ -171,7 +174,7 @@ public class TasksToBeCarryOutScheduleController extends Controller
 	 * The priority column.
 	 */
 	@FXML
-	private TableColumn<TaskToBeCarryOut, String> priorityColumn;
+	private TableColumn<TaskToBeCarryOut, TaskToBeCarryOut> priorityColumn;
 
 	/**
 	 * The current progression column.
@@ -262,11 +265,32 @@ public class TasksToBeCarryOutScheduleController extends Controller
 
 		this.groupOfPlantsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGroupOfPlants().getWording()));
 		this.typeOfTasksColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeOfTasks().getWording()));
+		this.priorityColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<TaskToBeCarryOut>(cellData.getValue()));
 		this.deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<TaskToBeCarryOut, LocalDate>("deadlineDate"));
-		// this.priorityColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(new ImageView(cellData.getValue().getPriority().getPath()))); // TODO A FINIR.
-		this.priorityColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPriority().getPath()));
 		this.currentProgressionColumn.setCellValueFactory(new PropertyValueFactory<TaskToBeCarryOut, Integer>("currentProgression"));
 		this.descriptionColumn.setCellValueFactory(new PropertyValueFactory<TaskToBeCarryOut, String>("description"));
+
+		this.priorityColumn.setCellFactory(new Callback<TableColumn<TaskToBeCarryOut, TaskToBeCarryOut>, TableCell<TaskToBeCarryOut, TaskToBeCarryOut>>()
+		{
+			@Override
+			public TableCell<TaskToBeCarryOut, TaskToBeCarryOut> call(TableColumn<TaskToBeCarryOut, TaskToBeCarryOut> param)
+			{
+				TableCell<TaskToBeCarryOut, TaskToBeCarryOut> cell = new TableCell<TaskToBeCarryOut, TaskToBeCarryOut>()
+				{
+					@Override
+					public void updateItem(TaskToBeCarryOut item, boolean empty)
+					{
+						if (item != null)
+						{
+							ImageView imageView = new ImageView(item.getPriority().getPath());
+							setGraphic(imageView);
+						}
+					}
+				};
+
+				return cell;
+			}
+		});
 
 		this.schedule.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		updateSchedule();
